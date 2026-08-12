@@ -346,7 +346,10 @@
             width: 35%;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
+         }
+         .head-3-box-conainer h3 {
+            line-height: 1.7rem;
          }
          .head-3-box-conainer-instructions {
             display: flex;
@@ -379,7 +382,7 @@
          }
          .head-3-box-alert {
             color: #ce0e00;
-            font-weight: 600;
+            font-weight: 400;
          }
          .head-4-box {
             display: flex;
@@ -423,7 +426,7 @@
             height: 45px;
             padding: 0 15px;
             font-size: 17px;
-            font-weight: 500;
+            font-weight: 600;
             border-bottom: 1px solid #dfe1e5;
             white-space: nowrap;
          }
@@ -1309,13 +1312,14 @@
 
          <div class="head-2-box">
             <h1 class="head-2-box-child-1">
-               Ready-to-Use Therapeutic Food (RUTF). For the dietary management
-               of children > 6 months with Severe Acute Malnutrition without
-               medical complications
+               Ready-to-Use Therapeutic Food (RUTF)<br/><br/>
+               1 SACHET = 500 kcal<br/> Dose recommendation: 150–185 kcal/kg/day <br/>per
+               child for 4 to 8 weeks.
             </h1>
             <h1 class="head-2-box-child-2">
-               1 SACHET = 500 kcal Dose recommendation: 150–185 kcal/kg/day per
-               child for 4 to 8 weeks.
+               For the dietary management
+               of children > 6 months with Severe Acute Malnutrition without
+               medical complications.
             </h1>
          </div>
          <div class="devider"></div>
@@ -1360,6 +1364,26 @@
                   >Do Not Heat
                </h3>
                <h3>
+                   <svg
+                     stroke="oklch(72.3% .219 149.579)"
+                     fill="oklch(72.3% .219 149.579)"
+                     stroke-width="0"
+                     viewBox="0 0 512 512"
+                     class="text-green-500 text-lg mt-[3px]"
+                     height="1em"
+                     width="2.5em"
+                     xmlns="http://www.w3.org/2000/svg"
+                  >
+                     <path
+                        fill="none"
+                        stroke-linecap="square"
+                        stroke-miterlimit="10"
+                        stroke-width="44"
+                        d="M416 128 192 384l-96-96"
+                     ></path></svg
+                  >Wash Hands & Knead
+               </h3>
+               <h3>
                   <svg
                      stroke="oklch(72.3% .219 149.579)"
                      fill="oklch(72.3% .219 149.579)"
@@ -1397,7 +1421,7 @@
                         stroke-width="44"
                         d="M416 128 192 384l-96-96"
                      ></path></svg
-                  >Child Eats
+                  >Feed Child
                </h3>
                <h3>
                   <svg
@@ -1427,14 +1451,13 @@
                </div>
                <h3>
                   Blend of non-hydrogenated vegetable oil (contains one or more
-                  of the following: palm, soybean, canola), sugar,
+                  of the following: palm, <b>soybean</b>, canola), sugar,
                   <b>whey</b> powder, nonfat <b>milk</b> powder, <b>peanuts</b>,
                   <b>soy</b> flour, fully hydrogenated vegetable oil (palm),
                   vitamin and mineral premix.
                </h3>
                <h4 class="head-3-box-alert">
-                  ALLERGENS : peanuts, milk, soy. May contain traces of gluten.
-                  Packaged in a protective atmosphere.
+                  <b>ALLERGENS</b> : <b>peanuts</b>, <b>milk</b>, <b>soy</b>. May contain traces of <b>gluten</b>.
                </h4>
             </div>
          </div>
@@ -1681,8 +1704,8 @@
                   <h3>Use Under Medical Supervision</h3>
                   <p>
                      Intended as the sole source of nutrition in conjunction
-                     with breastfeeding. Not to be used for Nasogastric Tube (NG
-                     tube) administration.
+                     with breastfeeding.<br/> <span style="text-transform: uppercase;">Not to be used for Nasogastric Tube (NG
+                     tube) administration.</span>
                   </p>
                </div>
             </div>
@@ -1695,7 +1718,7 @@
                   <h3>Once opened, discard after 24 hours.</h3>
                   <p>
                      Best stored below 30°C, in a dry place, away from direct
-                     sunlight <br /><b>Net weight:</b> 92g
+                     sunlight <br/> Packaged in a protective atmosphere. <br /><b>Net weight:</b> 92g
                   </p>
                </div>
             </div>
@@ -1706,7 +1729,7 @@
                <p>MANUFACTURED BY:</p>
                <h5>EDESIA</h5>
                <p>NORTH KINGSTOWN, RI 02852</p>
-               <p>COUNTRY OF ORIGIN: U.S.A.</p>
+               <!-- <p>COUNTRY OF ORIGIN: U.S.A.</p> -->
             </div>
             <div>
                <span class="product-of-usa"><h3>PRODUCT OF U.S.A.</h3></span>
@@ -1868,19 +1891,19 @@
          collectProtectedTextNodes();
 
          function lockLayoutDirection() {
-            document.documentElement.dir = "ltr";
-            document.body.dir = "ltr";
-            document.documentElement.style.direction = "ltr";
-            document.body.style.direction = "ltr";
+            <!-- document.documentElement.dir = "ltr"; -->
+            <!-- document.body.dir = "ltr"; -->
+            <!-- document.documentElement.style.direction = "ltr"; -->
+            <!-- document.body.style.direction = "ltr"; -->
 
             document.querySelectorAll(
                ".head-1-box, .language-dropdown, .audio-player-container, .head-4-box, .head-6-box, .head-2-box, .head-3-box, .head-5-box",
             ).forEach((container) => {
-               container.style.direction = "ltr";
-               container.style.textAlign = "left";
+               <!-- container.style.direction = "ltr"; -->
+               <!-- container.style.textAlign = "left"; -->
                container.querySelectorAll("*").forEach((element) => {
-                  element.style.direction = "ltr";
-                  element.style.textAlign = "left";
+                  <!-- element.style.direction = "ltr"; -->
+                  <!-- element.style.textAlign = "left"; -->
                });
             });
          }
@@ -2066,7 +2089,7 @@
             if (!languageCode || language === "English") {
                restoreEnglish();
                document.documentElement.lang = "en";
-               document.documentElement.dir = "ltr";
+               <!-- document.documentElement.dir = "ltr"; -->
                return;
             }
  

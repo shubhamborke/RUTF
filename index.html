@@ -414,7 +414,7 @@
             min-width: 50rem;
             border-collapse: collapse;
             font-family: Arial, sans-serif;
-            color: #18345c;
+            color: #000;
             table-layout: fixed;
          }
 
@@ -1307,17 +1307,17 @@
                <span data-i18n="head2_title"
                   >Ready-to-Use Therapeutic Food (RUTF)</span
                ><br /><br />
-               <span data-i18n="head2_sachet">1 SACHET = 500 kcal</span><br />
-               <span data-i18n="head2_dose"
+               <span data-i18n="head2_sachet" style="font-weight: 400;">1 SACHET = 500 kcal</span><br />
+               <span data-i18n="head2_dose" style="font-weight: 400;"
                   >Dose recommendation: 150–185 kcal/kg/day</span
                >
                <br />
-               <span data-i18n="head2_perchild"
+               <span data-i18n="head2_perchild" style="font-weight: 400;"
                   >per child for 4 to 8 weeks.</span
                >
             </h1>
             <h1 class="head-2-box-child-2">
-               <span data-i18n="head2_mgmt"
+               <span data-i18n="head2_mgmt" style="font-weight: 400;"
                   >For the dietary management of children > 6 months with Severe
                   Acute Malnutrition without medical complications.</span
                >
@@ -1472,7 +1472,7 @@
          <div class="devider"></div>
          <div class="head-4-box notranslate" translate="no">
             <div class="head-4-box-conainer">
-               <h1>NUTRITIONAL VALUES</h1>
+               <h1>Nutritional Values</h1>
                <span>Nutrients per serving</span>
                <div class="nutrition-table-wrapper">
                   <table class="nutrition-table">
@@ -1757,6 +1757,7 @@
                <h5>EDESIA</h5>
                <p>NORTH KINGSTOWN, RI 02852</p>
                <!-- <p>COUNTRY OF ORIGIN: U.S.A.</p> -->
+                <p><a href="https://www.edesianutrition.org/" style="text-decoration: none; color: #000; font-size:medium">edesianutrition.org</a></p>
             </div>
             <div>
                <span class="product-of-usa"><h3>PRODUCT OF U.S.A.</h3></span>
@@ -2530,8 +2531,9 @@
 
          function getBoxText(selector) {
             const el = document.querySelector(selector);
+            console.log(el.textContent.split("\n").join("\n").trim())
             if (!el) return "";
-            return el.textContent.replace(/\s+/g, " ").trim();
+            return el.textContent.split("\n").join("\n").toLowerCase().replaceAll("kg", " kilo gram").replaceAll("kcal"," kilocalorie").replaceAll("/", " per").replaceAll(">", " greater than").replaceAll(",", ",\n").replaceAll("Nasogastric Tube (NG tube)", " Nasogastric Tube").replaceAll("°C", " degree Celsius").replaceAll("92g", " 92 gram").trim();
          }
 
          function estimateSpeechDurationMs(text) {
@@ -2684,6 +2686,7 @@
 
             const texts = selectors.map(getBoxText).filter(Boolean);
             if (!texts.length) return;
+            console.log(texts)
 
             const generation = ++playbackGeneration;
 

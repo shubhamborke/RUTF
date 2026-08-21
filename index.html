@@ -2533,7 +2533,7 @@
             const el = document.querySelector(selector);
             console.log(el.textContent.split("\n").join("\n").trim())
             if (!el) return "";
-            return el.textContent.split("\n").join("\n").toLowerCase().replaceAll("kg", " kilo gram").replaceAll("kcal"," kilocalorie").replaceAll("/", " per").replaceAll(">", " greater than").replaceAll(",", ",\n").replaceAll("Nasogastric Tube (NG tube)", " Nasogastric Tube").replaceAll("°C", " degree Celsius").replaceAll("92g", " 92 gram").trim();
+            return el.textContent.split("\n").join("\n").toLowerCase().replaceAll("kg", " kilo gram").replaceAll("kcal"," kilocalorie").replaceAll("/", " per").replaceAll(">", " greater than").replaceAll(",", ",\n").replaceAll("nasogastric tube (ng tube)", " Nasogastric Tube").replaceAll("°c", " degree Celsius").replaceAll("92g", " 92 gram").trim();
          }
 
          function estimateSpeechDurationMs(text) {

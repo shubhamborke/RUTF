@@ -2531,7 +2531,6 @@
 
          function getBoxText(selector) {
             const el = document.querySelector(selector);
-            console.log(el.textContent.split("\n").join("\n").trim())
             if (!el) return "";
             return el.textContent.split("\n").join("\n").toLowerCase().replaceAll("kg", " kilo gram").replaceAll("kcal"," kilocalorie").replaceAll("/", " per").replaceAll(">", " greater than").replaceAll(",", ",\n").replaceAll("nasogastric tube (ng tube)", " Nasogastric Tube").replaceAll("°c", " degree Celsius").replaceAll("92g", " 92 gram").trim();
          }
@@ -2686,13 +2685,12 @@
 
             const texts = selectors.map(getBoxText).filter(Boolean);
             if (!texts.length) return;
-            console.log(texts)
 
             const generation = ++playbackGeneration;
 
             playerState = "playing";
             playBtn.classList.add("playing");
-            startKeepAlive();
+            // startKeepAlive();
 
             let i = 0;
             function next() {

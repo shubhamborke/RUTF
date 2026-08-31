@@ -1,0 +1,2813 @@
+<!doctype html>
+<html lang="en" class="notranslate">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="google" content="notranslate" />
+      <title>RUTF</title>
+   </head>
+   <body class="notranslate">
+      <style>
+         @font-face {
+            font-family: "New Spirit";
+            src:
+               url("new_spirit_font/fonnts.com-New-Spirit-.otf") format("woff2"),
+               url("new_spirit_font/fonnts.com-New-Spirit-Medium.otf")
+                  format("woff");
+            font-weight: normal;
+            font-style: normal;
+         }
+         /* =========================================================
+   RUTF GLOBAL
+========================================================= */
+
+         /* =========================================================
+   RUTF CONTAINER
+   ========================================================= */
+
+         #rutfWidget,
+         #rutfWidget * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            scrollbar-gutter: stable;
+            font-size: 1em;
+            color: #000;
+            font-family: new-spirit, sans-serif;
+         }
+         #rutfWidget {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+         }
+
+         .font-bold {
+            font-weight: 600;
+         }
+         #font-bold {
+            font-weight: 600;
+         }
+         #font-bold-size {
+            font-weight: 600;
+            font-size: 1.2em;
+         }
+         #detail-font {
+            font-size: 1rem;
+         }
+
+         #rutfHead1Box,
+         #rutfLanguageDropdown,
+         #rutfAudioPlayerContainer,
+         #rutfHead4Box,
+         #rutfHead6Box,
+         #rutfHead2Box,
+         #rutfHead3Box,
+         #rutfHead5Box {
+            direction: ltr;
+            text-align: left;
+            unicode-bidi: normal;
+         }
+         #rutfHead6Box > p {
+            display: none;
+         }
+         #product-sale-box h3 {
+            color: #fff;
+            font-weight: 600;
+         }
+         #rutfHead1Box {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            margin-top: -6rem;
+         }
+         /* #rutfHead1Box:before {
+   content: "";
+   position: absolute;
+   width: 100%;
+   height: 14rem;
+   z-index: -1;
+   background-color: #ce0e00;
+} */
+         #rutfHead1Box h1 {
+            color: #fff;
+            font-size: 4rem;
+            text-align: center;
+            padding: 2rem 0;
+         }
+         #rutfHead1Box img {
+            width: 55.25rem;
+            max-width: calc(100% - 28px);
+            height: auto;
+            margin: 14px auto;
+            display: block;
+
+            border-radius: 10px;
+            box-sizing: border-box;
+         }
+         #rutfLanguageDropdown {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "New Spirit", sans-serif;
+            padding-top: 2rem;
+         }
+
+         #languageBtn {
+            width: 20rem;
+            height: 3rem;
+            border: 2px solid #a5a8b8;
+            border-radius: 32px;
+            background: #f6f3f8;
+            display: flex;
+            align-items: center;
+            padding: 0 26px;
+            cursor: pointer;
+            color: #111827;
+         }
+
+         #languageLogo {
+            width: 28px;
+            height: 19px;
+            object-fit: cover;
+            border: 1px solid #d0d0d0;
+            flex-shrink: 0;
+            border-radius: 4px;
+         }
+
+         #rutfLanguageText {
+            flex: 1;
+            text-align: left;
+            margin-left: 14px;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 0;
+         }
+
+         #rutfArrow {
+            width: 12px;
+            height: 12px;
+            border-right: 3px solid #263346;
+            border-bottom: 3px solid #263346;
+            transform: rotate(45deg);
+            margin-right: 2px;
+            margin-top: -6px;
+            transition: transform 0.2s ease;
+         }
+
+         #rutfLanguageDropdown[data-open] #rutfArrow {
+            transform: rotate(225deg);
+            margin-top: 6px;
+         }
+
+         #languageMenu {
+            position: absolute;
+            top: calc(100% + 8px);
+            width: 20rem;
+            background: #fff;
+            border: 1px solid #d0d2dc;
+            border-radius: 16px;
+            padding: 8px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            display: none;
+            z-index: 1000;
+         }
+
+         #rutfLanguageDropdown[data-open] #languageMenu {
+            display: block;
+         }
+
+         #languageMenu > div {
+            padding: 12px 25px;
+            font-size: 17px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+         }
+
+         #languageMenu > div:hover {
+            background: #f2f0f5;
+         }
+         #languageMenu > div img {
+            border-radius: 19px;
+         }
+
+         #rutfAudioPlayerContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 2rem;
+         }
+         #rutfAudioPlayer {
+            width: 27rem;
+            height: 3.5rem;
+
+            background: #f9f7fa;
+            border-radius: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 22px 0 15px;
+
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+
+            box-sizing: border-box;
+         }
+
+         /* PLAY BUTTON */
+
+         #audioPlayBtn {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+            border-radius: 50%;
+
+            background: #ff2635;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+         }
+
+         /* PLAY TRIANGLE */
+
+         #rutfPlayIcon {
+            width: 0;
+            height: 0;
+
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 16px solid white;
+
+            margin-left: 4px;
+         }
+
+         /* PAUSE ICON */
+
+         #audioPlayBtn[data-playing] #rutfPlayIcon {
+            width: 16px;
+            height: 20px;
+
+            border: none;
+
+            position: relative;
+
+            margin-left: 0;
+         }
+
+         #audioPlayBtn[data-playing] #rutfPlayIcon::before,
+         #audioPlayBtn[data-playing] #rutfPlayIcon::after {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            width: 5px;
+            height: 20px;
+
+            background: white;
+
+            border-radius: 1px;
+         }
+
+         #audioPlayBtn[data-playing] #rutfPlayIcon::before {
+            left: 0;
+         }
+
+         #audioPlayBtn[data-playing] #rutfPlayIcon::after {
+            right: 0;
+         }
+
+         /* WAVEFORM */
+
+         #waveform {
+            flex: 1;
+
+            height: 3.5rem;
+
+            margin-left: 15px;
+            margin-right: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 3px;
+
+            overflow: hidden;
+         }
+
+         /* EACH BAR (created dynamically by the script, one <span> per bar) */
+
+         #waveform > span {
+            width: 2px;
+
+            min-width: 2px;
+
+            background: #ff727a;
+
+            border-radius: 2px;
+
+            transform-origin: center;
+
+            transition:
+               background 0.15s ease,
+               opacity 0.15s ease;
+         }
+
+         /* PLAYED BARS */
+
+         #waveform > span[data-played] {
+            background: #ff2635;
+         }
+
+         /* TIME */
+
+         #audioTime {
+            /* min-width: 44px; */
+
+            font-size: 16px;
+
+            color: #ff0000;
+
+            font-weight: 500;
+
+            text-align: right;
+
+            font-variant-numeric: tabular-nums;
+         }
+
+         #rutfHead2Box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 0 0 0;
+            gap: 3.5rem;
+         }
+
+         #rutfHead2Title,
+         #rutfHead2Subtitle {
+            font-size: 1.6em;
+            font-weight: bold;
+         }
+         #rutfHead2Title {
+            width: 70%;
+            text-align: center;
+         }
+         #rutfHead2Subtitle {
+            width: 80%;
+            text-align: center;
+         }
+         /* Lines after the first were plain (not bold) in the original markup */
+         #rutfHead2Title > div:not(:first-child),
+         #rutfHead2Subtitle > div {
+            font-weight: 400;
+         }
+         /* Replicates the original's extra blank line (double <br>) between the
+   title and the "1 SACHET = 500 kcal" line beneath it */
+         #rutfHead2Title > div:nth-child(2) {
+            margin-top: 1em;
+         }
+         #rutfDivider1,
+         #rutfDivider2,
+         #rutfDivider3,
+         #rutfDivider4 {
+            display: flex;
+            margin: 2rem 6rem;
+            height: 1px;
+            background-color: #d0d2dc;
+         }
+
+         #rutfHead3Box {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+            gap: 3rem;
+         }
+         #rutfUsageBox,
+         #rutfIngredientsBox {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            font-size: 1.1rem;
+         }
+         #rutfUsageBox h3,
+         #rutfIngredientsBox h3 {
+            line-height: 1.7rem;
+         }
+         #rutfUsageBox > h3 > svg {
+            width: 1em;
+         }
+         #list-titles {
+            padding-left: 1rem;
+            width: 100%;
+         }
+         /* Icon + label rows: flexbox keeps the icon and its text glued together
+   regardless of incidental whitespace WordPress may reformat the HTML with */
+         #rutfUsageBox > h3 {
+            display: flex;
+            align-items: center;
+         }
+         #rutfIngredientsBox {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.5rem;
+         }
+         #rutfHead3Box div h3 {
+            font-weight: 100;
+            line-height: 1.5rem;
+            letter-spacing: 0.5px;
+            word-spacing: 0.5px;
+            margin-left: 1rem;
+         }
+         #rutfHead3Box div h3 b {
+            font-weight: 600;
+         }
+         #rutfHead3Box div h4 {
+            line-height: 1.5rem;
+            letter-spacing: 0.5px;
+            margin-left: 1rem;
+         }
+         #rutfUsageHeading,
+         #rutfIngredientsHeading {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+         }
+         #rutfUsageHeading img,
+         #rutfIngredientsHeading img {
+            width: 2.5rem;
+         }
+         #rutfAllergensAlert {
+            color: #ce0e00;
+            font-weight: 400;
+         }
+         #rutfAllergensAlert b {
+            color: #ce0e00;
+            font-weight: 600;
+         }
+         #rutfHead4Box {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+         }
+         #rutfHead4BoxContainer {
+            font-family: proxima-soft, sans-serif;
+         }
+         #rutfHead4BoxContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+         }
+         #rutfHead4BoxContainer span {
+            font-size: 1.2rem;
+         }
+         #rutfNutritionTableWrapper {
+            width: 50rem;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 10px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            scrollbar-gutter: auto;
+         }
+
+         #rutfNutritionTable {
+            width: 100%;
+            min-width: 50rem;
+            border-collapse: collapse;
+            font-family: "proxima-soft";
+            color: #000;
+            table-layout: fixed;
+         }
+
+         #rutfNutritionTable th {
+            height: 45px;
+            padding: 0 15px;
+            font-size: 17px;
+            font-weight: 600;
+            border-bottom: 1px solid #dfe1e5;
+            white-space: nowrap;
+            background: #fafbfc;
+            vertical-align: middle;
+         }
+
+         #rutfNutritionTable thead th:nth-child(1) {
+            width: 40%;
+            text-align: left;
+         }
+
+         #rutfNutritionTable thead th:nth-child(2) {
+            width: 15%;
+            text-align: center;
+         }
+
+         #rutfNutritionTable thead th:nth-child(3),
+         #rutfNutritionTable thead th:nth-child(4) {
+            width: 22.5%;
+            text-align: center;
+         }
+
+         #rutfNutritionTable td {
+            height: 56px;
+            padding: 0 15px;
+            font-size: 17px;
+            font-weight: 400;
+            border-bottom: 1px solid #dfe1e5;
+            white-space: nowrap;
+            vertical-align: middle;
+         }
+
+         #rutfNutritionTable tbody td:first-child {
+            text-align: left;
+         }
+
+         #rutfNutritionTable tbody td:not(:first-child) {
+            text-align: center;
+         }
+
+         #rutfNutritionTable tbody tr:nth-child(odd) {
+            background: #ffffff;
+         }
+
+         #rutfNutritionTable tbody tr:last-child td {
+            border-bottom: none;
+         }
+
+         #rutfHead5Box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            gap: 2.7rem;
+         }
+         #rutfHead5Box > div {
+            display: flex;
+            align-items: center;
+            width: 60%;
+            gap: 2rem;
+         }
+         #rutfHead5Box > div img {
+            width: 5rem;
+         }
+         #rutfHead5Box > div > div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+         }
+         #rutfHead6Box {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+         }
+         #rutfHead6Box div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+         }
+         #rutfHead6Box div p {
+            font-size: 0.8rem;
+            font-weight: 600;
+         }
+         #rutfHead6Box div h5 {
+            font-size: 1.5rem;
+            font-weight: 600;
+         }
+         #rutfProductOfUsa,
+         #rutfNotForSale {
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            text-align: center;
+         }
+         #rutfProductOfUsa {
+            background-color: oklch(42.4% 0.199 265.638);
+            color: #fff;
+         }
+         #rutfNotForSale {
+            background-color: oklch(44.4% 0.177 26.899);
+            color: #fff;
+         }
+         #rutfHead7Box {
+            background-color: #ce0e00;
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+         }
+         #rutfHead7Box h3 {
+            display: flex;
+            align-items: flex-start;
+         }
+         #rutfHead7Box h3 p {
+            font-size: 0.5rem;
+            padding-left: 0.2rem;
+         }
+         @media (max-width: 1024px) {
+            #languageBtn {
+               width: min(20rem, calc(100vw - 3rem));
+            }
+
+            #languageMenu {
+               width: min(20rem, calc(100vw - 3rem));
+               max-height: 60vh;
+               overflow-y: auto;
+            }
+
+            #rutfAudioPlayer {
+               width: min(27rem, calc(100vw - 4rem));
+            }
+
+            #rutfHead2Box {
+               padding: 3rem 2rem;
+               gap: 2.5rem;
+            }
+
+            #rutfHead2Title,
+            #rutfHead2Subtitle {
+               width: 100%;
+            }
+
+            #rutfDivider1,
+            #rutfDivider2,
+            #rutfDivider3,
+            #rutfDivider4 {
+               margin: 2rem 3rem;
+            }
+
+            #rutfHead3Box {
+               gap: 2rem;
+               padding: 2rem;
+            }
+
+            #rutfUsageBox,
+            #rutfIngredientsBox {
+               width: 45%;
+            }
+
+            #rutfNutritionTableWrapper {
+               width: calc(100vw - 6rem);
+               max-width: 50rem;
+               overflow-x: auto;
+            }
+
+            #rutfNutritionTable {
+               min-width: 45rem;
+            }
+
+            #rutfHead5Box > div {
+               width: 80%;
+            }
+         }
+
+         /* ---------- MOBILE ---------- */
+         @media (max-width: 767px) {
+            /* Prevent horizontal overflow */
+            #rutfHead1Box {
+               margin-top: -2rem;
+            }
+            #rutfWidget {
+               max-width: 100%;
+               overflow-x: hidden;
+            }
+
+            #rutfWidget {
+               width: 100%;
+               max-width: 100%;
+               box-sizing: border-box;
+            }
+            #rutfHead1Box img {
+               width: 100%;
+            }
+
+            /* =========================
+LANGUAGE DROPDOWN
+========================= */
+
+            #rutfLanguageDropdown {
+               position: relative;
+               width: 100%;
+               display: flex;
+               justify-content: center;
+               box-sizing: border-box;
+               padding: 0 1rem;
+            }
+
+            #languageBtn {
+               width: 100%;
+               max-width: 20rem;
+               height: 3rem;
+               padding: 0 18px;
+            }
+
+            #rutfLanguageText {
+               font-size: 18px;
+               margin-left: 10px;
+            }
+
+            #languageMenu {
+               width: calc(100% - 2rem);
+               max-width: 20rem;
+               max-height: 60vh;
+               overflow-y: auto;
+               box-sizing: border-box;
+            }
+
+            #languageMenu > div {
+               padding: 12px 18px;
+               font-size: 16px;
+            }
+
+            /* =========================
+AUDIO PLAYER
+========================= */
+
+            #rutfAudioPlayerContainer {
+               width: 100%;
+               box-sizing: border-box;
+               padding: 2rem 1rem 0;
+            }
+
+            #rutfAudioPlayer {
+               width: 100%;
+               max-width: 27rem;
+               height: 3.5rem;
+               padding: 0 15px 0 10px;
+            }
+
+            #audioPlayBtn {
+               width: 2.4rem;
+               height: 2.4rem;
+               flex-shrink: 0;
+            }
+
+            #waveform {
+               margin-left: 10px;
+               margin-right: 10px;
+               gap: 2px;
+               min-width: 0;
+            }
+
+            #waveform > span {
+               width: 2px;
+               min-width: 2px;
+            }
+
+            #audioTime {
+               font-size: 14px;
+               flex-shrink: 0;
+            }
+
+            /* =========================
+FIRST CONTENT SECTION
+========================= */
+
+            #rutfHead2Box {
+               width: 100%;
+               box-sizing: border-box;
+               padding: 2.5rem 1.25rem 0rem 1.25rem;
+               gap: 2rem;
+            }
+
+            #rutfHead2Title,
+            #rutfHead2Subtitle {
+               width: 100%;
+               max-width: 100%;
+               margin: 0;
+            }
+
+            #rutfHead2Title,
+            #rutfHead2Subtitle {
+               font-size: clamp(1.5rem, 5vw, 2rem);
+               line-height: 1.35;
+            }
+
+            /* =========================
+DIVIDER
+========================= */
+
+            #rutfDivider1,
+            #rutfDivider2,
+            #rutfDivider3,
+            #rutfDivider4 {
+               width: auto;
+               margin: 1.5rem 1rem;
+            }
+
+            /* =========================
+USAGE / INGREDIENTS
+========================= */
+
+            #rutfHead3Box {
+               width: 100%;
+               box-sizing: border-box;
+               flex-direction: column;
+               padding: 1.5rem 1rem 0rem 1rem;
+               gap: 2.5rem;
+            }
+
+            #rutfUsageBox,
+            #rutfIngredientsBox {
+               width: 100%;
+               max-width: 100%;
+               box-sizing: border-box;
+            }
+
+            #rutfUsageHeading,
+            #rutfIngredientsHeading {
+               gap: 0.75rem;
+            }
+
+            #rutfUsageHeading img,
+            #rutfIngredientsHeading img {
+               width: 2.25rem;
+               flex-shrink: 0;
+            }
+
+            #rutfUsageHeading h1,
+            #rutfIngredientsHeading h1 {
+               font-size: clamp(1.4rem, 5vw, 2rem);
+               margin: 0;
+            }
+
+            #rutfHead3Box div h3,
+            #rutfHead3Box div h4 {
+               padding-left: 0.5rem;
+               margin-left: 0;
+               font-size: 1rem;
+               line-height: 1.5rem;
+               word-break: normal;
+               overflow-wrap: break-word;
+            }
+
+            /* =========================
+NUTRITION SECTION
+========================= */
+
+            #rutfHead4Box {
+               width: 100%;
+               box-sizing: border-box;
+               padding: 1.5rem 1rem;
+            }
+
+            #rutfHead4BoxContainer {
+               width: 100%;
+               max-width: 100%;
+               gap: 1.25rem;
+            }
+
+            #rutfHead4BoxContainer h1 {
+               font-size: clamp(1.5rem, 6vw, 2rem);
+               text-align: center;
+               margin: 0;
+            }
+
+            #rutfHead4BoxContainer span {
+               font-size: 1.15rem;
+               text-align: center;
+            }
+
+            #rutfNutritionTableWrapper {
+               width: 100%;
+               max-width: 100%;
+               overflow-x: auto;
+               overflow-y: hidden;
+               -webkit-overflow-scrolling: touch;
+               box-sizing: border-box;
+               border-radius: 10px;
+            }
+
+            /*
+Keep the original table dimensions/styles.
+On small screens the table scrolls horizontally
+instead of breaking the page layout.
+*/
+            #rutfNutritionTable {
+               min-width: 45rem;
+               width: 100%;
+            }
+
+            #rutfNutritionTable th,
+            #rutfNutritionTable td {
+               white-space: nowrap;
+            }
+
+            /* =========================
+INFORMATION / BREASTFEEDING
+========================= */
+
+            #rutfHead5Box {
+               width: 100%;
+               box-sizing: border-box;
+               padding: 1.5rem 1rem 0rem 1.5rem;
+               gap: 2rem;
+            }
+
+            #rutfHead5Box > div {
+               width: 100%;
+               max-width: 100%;
+               box-sizing: border-box;
+               gap: 1rem;
+               align-items: flex-start;
+            }
+
+            #rutfHead5Box > div img {
+               width: 4rem;
+               flex-shrink: 0;
+            }
+
+            #rutfHead5Box > div > div {
+               min-width: 0;
+            }
+
+            #rutfHead5Box > div h3,
+            #rutfHead5Box > div p {
+               margin-top: 0;
+               margin-bottom: 0;
+               overflow-wrap: break-word;
+            }
+
+            /* =========================
+MANUFACTURER SECTION
+========================= */
+
+            #rutfHead6Box {
+               width: 100%;
+               box-sizing: border-box;
+               margin: 0;
+               padding: 1.5rem 1rem;
+               flex-direction: column;
+               align-items: center;
+               justify-content: center;
+               gap: 2rem;
+               text-align: center;
+            }
+
+            #rutfHead6Box div {
+               align-items: center;
+               width: 100%;
+            }
+
+            #rutfHead6Box div h5 {
+               font-size: 1.4rem;
+            }
+
+            #rutfProductOfUsa,
+            #rutfNotForSale {
+               width: min(100%, 18rem);
+               box-sizing: border-box;
+            }
+
+            /* =========================
+FOOTER / RED BAR
+========================= */
+
+            #rutfHead7Box {
+               width: 100%;
+               box-sizing: border-box;
+               padding: 1rem;
+            }
+         }
+
+         /* ---------- SMALL MOBILE ---------- */
+         @media (max-width: 480px) {
+            #languageBtn {
+               max-width: 100%;
+               padding: 0 15px;
+            }
+
+            #rutfLanguageText {
+               font-size: 17px;
+            }
+
+            #languageMenu {
+               width: calc(100% - 2rem);
+            }
+
+            #rutfAudioPlayerContainer {
+               padding-left: 0.75rem;
+               padding-right: 0.75rem;
+            }
+
+            #rutfAudioPlayer {
+               padding-left: 8px;
+               padding-right: 10px;
+            }
+
+            #audioPlayBtn {
+               width: 2.2rem;
+               height: 2.2rem;
+            }
+
+            #audioTime {
+               font-size: 13px;
+            }
+
+            #waveform {
+               margin-left: 7px;
+               margin-right: 7px;
+               gap: 1px;
+            }
+
+            #rutfHead2Box {
+               padding-left: 1rem;
+               padding-right: 1rem;
+            }
+
+            #rutfHead2Title,
+            #rutfHead2Subtitle {
+               font-size: 1.35rem;
+            }
+
+            #rutfHead3Box {
+               padding-left: 0.75rem;
+               padding-right: 0.75rem;
+            }
+
+            #rutfHead3Box div h3,
+            #rutfHead3Box div h4 {
+               font-size: 0.95rem;
+               line-height: 1.45rem;
+            }
+
+            #rutfHead5Box > div {
+               gap: 0.75rem;
+            }
+
+            #rutfHead5Box > div img {
+               width: 3.5rem;
+            }
+
+            #rutfHead5Box > div h3 {
+               font-size: 1rem;
+            }
+
+            #rutfHead5Box > div p {
+               font-size: 0.9rem;
+               line-height: 1.4rem;
+            }
+
+            #rutfHead6Box {
+               padding-left: 0.75rem;
+               padding-right: 0.75rem;
+            }
+         }
+
+         /* ---------- VERY SMALL PHONES ---------- */
+         @media (max-width: 360px) {
+            #languageBtn {
+               padding: 0 12px;
+            }
+
+            #languageLogo {
+               width: 25px;
+               height: 17px;
+            }
+
+            #rutfLanguageText {
+               font-size: 16px;
+               margin-left: 8px;
+            }
+
+            #rutfArrow {
+               width: 10px;
+               height: 10px;
+            }
+
+            #audioTime {
+               font-size: 12px;
+            }
+
+            #rutfHead2Title,
+            #rutfHead2Subtitle {
+               font-size: 1.2rem;
+            }
+
+            #rutfUsageHeading h1,
+            #rutfIngredientsHeading h1 {
+               font-size: 1.3rem;
+            }
+
+            #rutfHead5Box > div img {
+               width: 3rem;
+            }
+         }
+      </style>
+      <div id="rutfWidget" class="notranslate" translate="no">
+         <div id="rutfHead1Box" class="notranslate" translate="no">
+            <!-- <h1>RUTF</h1> -->
+            <img
+               src="https://www.edesianutrition.org/wp-content/uploads/2026/08/Sachet_RUTF_1-scaled.png"
+               alt="RUTF Image"
+            />
+         </div>
+         <div id="rutfLanguageDropdown" class="notranslate" translate="no">
+            <button id="languageBtn" type="button">
+               <img
+                  id="languageLogo"
+                  src="https://flagcdn.com/w40/us.png"
+                  alt="English"
+               />
+               <span id="rutfLanguageText">English</span>
+               <span id="rutfArrow"></span>
+            </button>
+            <div id="languageMenu">
+               <div
+                  id="rutfLangOptEnglish"
+                  data-value="English"
+                  data-flag="https://flagcdn.com/w40/us.png"
+                  data-selected
+               >
+                  <span>English</span>
+                  <img src="https://flagcdn.com/w40/us.png" alt="English" />
+               </div>
+               <div
+                  id="rutfLangOptArabic"
+                  data-value="Arabic"
+                  data-flag="https://flagcdn.com/w40/sa.png"
+               >
+                  <span>اختر العربية</span>
+                  <img src="https://flagcdn.com/w40/sa.png" alt="Arabic" />
+               </div>
+               <div
+                  id="rutfLangOptSpanish"
+                  data-value="Spanish"
+                  data-flag="https://flagcdn.com/w40/es.png"
+               >
+                  <span>Seleccionar Español</span>
+                  <img src="https://flagcdn.com/w40/es.png" alt="Spanish" />
+               </div>
+               <div
+                  id="rutfLangOptPortuguese"
+                  data-value="Portuguese"
+                  data-flag="https://flagcdn.com/w40/pt.png"
+               >
+                  <span>Selecionar Português</span>
+                  <img src="https://flagcdn.com/w40/pt.png" alt="Portuguese" />
+               </div>
+               <div
+                  id="rutfLangOptSwahili"
+                  data-value="Swahili"
+                  data-flag="https://flagcdn.com/w40/ke.png"
+               >
+                  <span>Chagua Kiswahili</span>
+                  <img src="https://flagcdn.com/w40/ke.png" alt="Swahili" />
+               </div>
+               <div
+                  id="rutfLangOptHausa"
+                  data-value="Hausa"
+                  data-flag="https://flagcdn.com/w40/ng.png"
+               >
+                  <span>Zabi Hausa</span>
+                  <img src="https://flagcdn.com/w40/ng.png" alt="Hausa" />
+               </div>
+               <div
+                  id="rutfLangOptIgbo"
+                  data-value="Igbo"
+                  data-flag="https://flagcdn.com/w40/ng.png"
+               >
+                  <span>Họrọ Igbo</span>
+                  <img src="https://flagcdn.com/w40/ng.png" alt="Igbo" />
+               </div>
+               <div
+                  id="rutfLangOptOromo"
+                  data-value="Oromo"
+                  data-flag="https://flagcdn.com/w40/et.png"
+               >
+                  <span>Afaan Oromoo filadhu</span>
+                  <img src="https://flagcdn.com/w40/et.png" alt="Oromo" />
+               </div>
+               <div
+                  id="rutfLangOptSomali"
+                  data-value="Somali"
+                  data-flag="https://flagcdn.com/w40/so.png"
+               >
+                  <span>Dooro Soomaali</span>
+                  <img src="https://flagcdn.com/w40/so.png" alt="Somali" />
+               </div>
+               <div
+                  id="rutfLangOptLuganda"
+                  data-value="Luganda"
+                  data-flag="https://flagcdn.com/w40/ug.png"
+               >
+                  <span>Londa Oluganda</span>
+                  <img src="https://flagcdn.com/w40/ug.png" alt="Luganda" />
+               </div>
+               <div
+                  id="rutfLangOptLingala"
+                  data-value="Lingala"
+                  data-flag="https://flagcdn.com/w40/cd.png"
+               >
+                  <span>Pona Lingála</span>
+                  <img src="https://flagcdn.com/w40/cd.png" alt="Lingala" />
+               </div>
+               <div
+                  id="rutfLangOptKikongo"
+                  data-value="Kikongo"
+                  data-flag="https://flagcdn.com/w40/cd.png"
+               >
+                  <span>Tála Kikongo</span>
+                  <img src="https://flagcdn.com/w40/cd.png" alt="Kikongo" />
+               </div>
+               <div
+                  id="rutfLangOptKinyarwanda"
+                  data-value="Kinyarwanda"
+                  data-flag="https://flagcdn.com/w40/rw.png"
+               >
+                  <span>Hitamo Ikinyarwanda</span>
+                  <img src="https://flagcdn.com/w40/rw.png" alt="Kinyarwanda" />
+               </div>
+               <div
+                  id="rutfLangOptMalagasy"
+                  data-value="Malagasy"
+                  data-flag="https://flagcdn.com/w40/mg.png"
+               >
+                  <span>Fidio ny teny Malagasy</span>
+                  <img src="https://flagcdn.com/w40/mg.png" alt="Malagasy" />
+               </div>
+               <div
+                  id="rutfLangOptTagalog"
+                  data-value="Tagalog"
+                  data-flag="https://flagcdn.com/w40/ph.png"
+               >
+                  <span>Piliin ang Tagalog</span>
+                  <img src="https://flagcdn.com/w40/ph.png" alt="Tagalog" />
+               </div>
+               <div
+                  id="rutfLangOptQuechua"
+                  data-value="Quechua"
+                  data-flag="https://flagcdn.com/w40/pe.png"
+               >
+                  <span>Chaymi rimaykuy Quechua</span>
+                  <img src="https://flagcdn.com/w40/pe.png" alt="Quechua" />
+               </div>
+               <div
+                  id="rutfLangOptKiche"
+                  data-value="Kiche"
+                  data-flag="https://flagcdn.com/w40/gt.png"
+               >
+                  <span>Ticha' le K'iche'</span>
+                  <img src="https://flagcdn.com/w40/gt.png" alt="K'iche'" />
+               </div>
+               <div
+                  id="rutfLangOptHaitianCreole"
+                  data-value="Haitian Creole"
+                  data-flag="https://flagcdn.com/w40/ht.png"
+               >
+                  <span>Chwazi Kreyòl Ayisyen</span>
+                  <img
+                     src="https://flagcdn.com/w40/ht.png"
+                     alt="Haitian Creole"
+                  />
+               </div>
+            </div>
+         </div>
+         <div id="rutfAudioPlayerContainer" class="notranslate" translate="no">
+            <div id="rutfAudioPlayer">
+               <button id="audioPlayBtn" type="button">
+                  <span id="rutfPlayIcon"></span>
+               </button>
+               <div id="waveform"></div>
+               <span id="audioTime">00:00</span>
+            </div>
+         </div>
+         <div id="rutfHead2Box">
+            <div id="rutfHead2Title">
+               <div data-i18n="head2_title" class="font-bold">
+                  Ready-to-Use Therapeutic Food (RUTF)
+               </div>
+               <div data-i18n="head2_sachet">1 SACHET = 500 kcal</div>
+               <div data-i18n="head2_dose">
+                  Dose recommendation: 150–185 kcal/kg/day
+               </div>
+               <div data-i18n="head2_perchild">per child for 4 to 8 weeks.</div>
+            </div>
+            <div id="rutfHead2Subtitle">
+               <div data-i18n="head2_mgmt">
+                  For the dietary management of children &gt; 6 months with
+                  Severe Acute Malnutrition without medical complications.
+               </div>
+            </div>
+         </div>
+         <div id="rutfDivider1"></div>
+         <div id="rutfHead3Box">
+            <div id="rutfUsageBox">
+               <div id="rutfUsageHeading">
+                  <img
+                     src="https://www.edesianutrition.org/wp-content/uploads/2026/08/Peanuts_bullet-p7kSXyZh.png"
+                     alt="Peanuts"
+                  />
+                  <h1 data-i18n="usage_heading" id="font-bold-size">
+                     Usage Instructions:
+                  </h1>
+               </div>
+               <h3>
+                  <svg
+                     stroke="#e15c3e"
+                     fill="#e15c3e"
+                     stroke-width="0"
+                     viewBox="0 0 1024 1024"
+                     fill-rule="evenodd"
+                     height="1em"
+                     width="2.5em"
+                     xmlns="http://www.w3.org/2000/svg"
+                  >
+                     <path
+                        d="M799.855 166.312c.023.007.043.018.084.059l57.69 57.69c.041.041.052.06.059.084a.118.118 0 0 1 0 .069c-.007.023-.018.042-.059.083L569.926 512l287.703 287.703c.041.04.052.06.059.083a.118.118 0 0 1 0 .07c-.007.022-.018.042-.059.083l-57.69 57.69c-.041.041-.06.052-.084.059a.118.118 0 0 1-.069 0c-.023-.007-.042-.018-.083-.059L512 569.926 224.297 857.629c-.04.041-.06.052-.083.059a.118.118 0 0 1-.07 0c-.022-.007-.042-.018-.083-.059l-57.69-57.69c-.041-.041-.052-.06-.059-.084a.118.118 0 0 1 0-.069c.007-.023.018-.042.059-.083L454.073 512 166.371 224.297c-.041-.04-.052-.06-.059-.083a.118.118 0 0 1 0-.07c.007-.022.018-.042.059-.083l57.69-57.69c.041-.041.06-.052.084-.059a.118.118 0 0 1 .069 0c.023.007.042.018.083.059L512 454.073l287.703-287.702c.04-.041.06-.052.083-.059a.118.118 0 0 1 .07 0Z"
+                     ></path>
+                  </svg>
+                  <div data-i18n="usage_no_water" id="list-titles">
+                     Do Not Add Water
+                  </div>
+               </h3>
+               <h3>
+                  <svg
+                     stroke="#e15c3e"
+                     fill="#e15c3e"
+                     stroke-width="0"
+                     viewBox="0 0 1024 1024"
+                     fill-rule="evenodd"
+                     height="1em"
+                     width="2.5em"
+                     xmlns="http://www.w3.org/2000/svg"
+                  >
+                     <path
+                        d="M799.855 166.312c.023.007.043.018.084.059l57.69 57.69c.041.041.052.06.059.084a.118.118 0 0 1 0 .069c-.007.023-.018.042-.059.083L569.926 512l287.703 287.703c.041.04.052.06.059.083a.118.118 0 0 1 0 .07c-.007.022-.018.042-.059.083l-57.69 57.69c-.041.041-.06.052-.084.059a.118.118 0 0 1-.069 0c-.023-.007-.042-.018-.083-.059L512 569.926 224.297 857.629c-.04.041-.06.052-.083.059a.118.118 0 0 1-.07 0c-.022-.007-.042-.018-.083-.059l-57.69-57.69c-.041-.041-.052-.06-.059-.084a.118.118 0 0 1 0-.069c.007-.023.018-.042.059-.083L454.073 512 166.371 224.297c-.041-.04-.052-.06-.059-.083a.118.118 0 0 1 0-.07c.007-.022.018-.042.059-.083l57.69-57.69c.041-.041.06-.052.084-.059a.118.118 0 0 1 .069 0c.023.007.042.018.083.059L512 454.073l287.703-287.702c.04-.041.06-.052.083-.059a.118.118 0 0 1 .07 0Z"
+                     ></path>
+                  </svg>
+                  <div data-i18n="usage_no_heat" id="list-titles">
+                     Do Not Heat
+                  </div>
+               </h3>
+               <h3>
+                  <svg
+                     stroke="oklch(72.3% .219 149.579)"
+                     fill="oklch(72.3% .219 149.579)"
+                     stroke-width="0"
+                     viewBox="0 0 512 512"
+                     height="1em"
+                     width="2.5em"
+                     xmlns="http://www.w3.org/2000/svg"
+                  >
+                     <path
+                        fill="none"
+                        stroke-linecap="square"
+                        stroke-miterlimit="10"
+                        stroke-width="44"
+                        d="M416 128 192 384l-96-96"
+                     ></path>
+                  </svg>
+                  <div data-i18n="usage_wash" id="list-titles">
+                     Wash Hands & Knead
+                  </div>
+               </h3>
+               <h3>
+                  <svg
+                     stroke="oklch(72.3% .219 149.579)"
+                     fill="oklch(72.3% .219 149.579)"
+                     stroke-width="0"
+                     viewBox="0 0 512 512"
+                     height="1em"
+                     width="2.5em"
+                     xmlns="http://www.w3.org/2000/svg"
+                  >
+                     <path
+                        fill="none"
+                        stroke-linecap="square"
+                        stroke-miterlimit="10"
+                        stroke-width="44"
+                        d="M416 128 192 384l-96-96"
+                     ></path>
+                  </svg>
+                  <div data-i18n="usage_squeeze" id="list-titles">
+                     Squeeze & Eat
+                  </div>
+               </h3>
+               <h3>
+                  <svg
+                     stroke="oklch(72.3% .219 149.579)"
+                     fill="oklch(72.3% .219 149.579)"
+                     stroke-width="0"
+                     viewBox="0 0 512 512"
+                     height="1em"
+                     width="2.5em"
+                     xmlns="http://www.w3.org/2000/svg"
+                  >
+                     <path
+                        fill="none"
+                        stroke-linecap="square"
+                        stroke-miterlimit="10"
+                        stroke-width="44"
+                        d="M416 128 192 384l-96-96"
+                     ></path>
+                  </svg>
+                  <div data-i18n="usage_feed" id="list-titles">Feed Child</div>
+               </h3>
+               <h3>
+                  <svg
+                     stroke="oklch(72.3% .219 149.579)"
+                     fill="oklch(72.3% .219 149.579)"
+                     stroke-width="0"
+                     viewBox="0 0 512 512"
+                     height="1em"
+                     width="2.5em"
+                     xmlns="http://www.w3.org/2000/svg"
+                  >
+                     <path
+                        fill="none"
+                        stroke-linecap="square"
+                        stroke-miterlimit="10"
+                        stroke-width="44"
+                        d="M416 128 192 384l-96-96"
+                     ></path>
+                  </svg>
+                  <div data-i18n="usage_supplement" id="list-titles">
+                     Supplement With Breastfeeding
+                  </div>
+               </h3>
+            </div>
+            <div id="rutfIngredientsBox">
+               <div id="rutfIngredientsHeading">
+                  <img
+                     src="https://www.edesianutrition.org/wp-content/uploads/2026/08/Peanuts_bullet-p7kSXyZh.png"
+                     alt="Peanuts"
+                  />
+                  <h1 data-i18n="ingredients_heading" id="font-bold-size">
+                     Ingredients:
+                  </h1>
+               </div>
+               <h3 data-i18n="ingredients_text">
+                  Blend of non-hydrogenated vegetable oil (contains one or more
+                  of the following: palm, <b>soybean</b>, canola), sugar,<b>
+                     whey</b
+                  >
+                  powder, nonfat <b>milk</b> powder, <b>peanuts</b>,
+                  <b>soy</b> flour, fully hydrogenated vegetable oil (palm),
+                  vitamin and mineral premix.
+               </h3>
+               <h4 id="rutfAllergensAlert" data-i18n="allergens_text">
+                  <b>ALLERGENS</b>: <b>peanuts</b>, <b>milk</b>, <b>soy</b>. May
+                  contain traces of <b>gluten</b>.
+               </h4>
+            </div>
+         </div>
+         <div id="rutfDivider2"></div>
+         <div id="rutfHead4Box" class="notranslate" translate="no">
+            <div id="rutfHead4BoxContainer">
+               <h1 id="font-bold-size">Nutritional Values</h1>
+               <span>Nutrients per serving</span>
+               <div id="rutfNutritionTableWrapper">
+                  <table id="rutfNutritionTable">
+                     <thead>
+                        <tr>
+                           <th>Nutrient</th>
+                           <th>Unit</th>
+                           <th>Per 100 g</th>
+                           <th>Per 92 g</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>Energy</td>
+                           <td>kcal</td>
+                           <td>540</td>
+                           <td>500</td>
+                        </tr>
+                        <tr>
+                           <td>Energy</td>
+                           <td>kJ</td>
+                           <td>2259</td>
+                           <td>2079</td>
+                        </tr>
+                        <tr>
+                           <td>Fat</td>
+                           <td>g</td>
+                           <td>33</td>
+                           <td>30</td>
+                        </tr>
+                        <tr>
+                           <td>Of which saturates</td>
+                           <td>g</td>
+                           <td>9.0</td>
+                           <td>8.3</td>
+                        </tr>
+                        <tr>
+                           <td>Of which omega-3</td>
+                           <td>g</td>
+                           <td>1.2</td>
+                           <td>1.1</td>
+                        </tr>
+                        <tr>
+                           <td>Of which omega-6</td>
+                           <td>g</td>
+                           <td>4.2</td>
+                           <td>3.9</td>
+                        </tr>
+                        <tr>
+                           <td>Trans fatty acids</td>
+                           <td>g</td>
+                           <td>&lt;1</td>
+                           <td>&lt;1</td>
+                        </tr>
+                        <tr>
+                           <td>Protein</td>
+                           <td>g</td>
+                           <td>14</td>
+                           <td>13</td>
+                        </tr>
+                        <tr>
+                           <td>Carbohydrates</td>
+                           <td>g</td>
+                           <td>46</td>
+                           <td>42</td>
+                        </tr>
+                        <tr>
+                           <td>Total sugars</td>
+                           <td>g</td>
+                           <td>41</td>
+                           <td>38</td>
+                        </tr>
+                        <tr>
+                           <td>Includes added sugars</td>
+                           <td>g</td>
+                           <td>22</td>
+                           <td>20</td>
+                        </tr>
+                        <tr>
+                           <td>Dietary fibers</td>
+                           <td>g</td>
+                           <td>3.0</td>
+                           <td>2.8</td>
+                        </tr>
+                        <tr>
+                           <td>Riboflavin (Vitamin B2)</td>
+                           <td>mg</td>
+                           <td>1.6</td>
+                           <td>1.5</td>
+                        </tr>
+                        <tr>
+                           <td>Niacin (Vitamin B3)</td>
+                           <td>mg</td>
+                           <td>5.0</td>
+                           <td>4.6</td>
+                        </tr>
+                        <tr>
+                           <td>Pantothenic acid (Vitamin B5)</td>
+                           <td>mg</td>
+                           <td>3.0</td>
+                           <td>2.8</td>
+                        </tr>
+                        <tr>
+                           <td>Vitamin B6</td>
+                           <td>mg</td>
+                           <td>0.6</td>
+                           <td>0.6</td>
+                        </tr>
+                        <tr>
+                           <td>Thiamin (Vitamin B1)</td>
+                           <td>mg</td>
+                           <td>0.5</td>
+                           <td>0.5</td>
+                        </tr>
+                        <tr>
+                           <td>Biotin (Vitamin B7)</td>
+                           <td>µg</td>
+                           <td>60</td>
+                           <td>55</td>
+                        </tr>
+                        <tr>
+                           <td>Folate</td>
+                           <td>µg DFE</td>
+                           <td>200</td>
+                           <td>184</td>
+                        </tr>
+                        <tr>
+                           <td>Vitamin B12</td>
+                           <td>µg</td>
+                           <td>1.6</td>
+                           <td>1.5</td>
+                        </tr>
+                        <tr>
+                           <td>Vitamin C</td>
+                           <td>mg</td>
+                           <td>50</td>
+                           <td>46</td>
+                        </tr>
+                        <tr>
+                           <td>Vitamin D</td>
+                           <td>µg</td>
+                           <td>15</td>
+                           <td>14</td>
+                        </tr>
+                        <tr>
+                           <td>Vitamin E</td>
+                           <td>mg α-TE</td>
+                           <td>20</td>
+                           <td>18</td>
+                        </tr>
+                        <tr>
+                           <td>Vitamin K</td>
+                           <td>µg</td>
+                           <td>16</td>
+                           <td>15</td>
+                        </tr>
+                        <tr>
+                           <td>Vitamin A</td>
+                           <td>µg RE</td>
+                           <td>800</td>
+                           <td>740</td>
+                        </tr>
+                        <tr>
+                           <td>Calcium</td>
+                           <td>mg</td>
+                           <td>350</td>
+                           <td>322</td>
+                        </tr>
+                        <tr>
+                           <td>Copper</td>
+                           <td>mg</td>
+                           <td>1.7</td>
+                           <td>1.6</td>
+                        </tr>
+                        <tr>
+                           <td>Iodine</td>
+                           <td>µg</td>
+                           <td>120</td>
+                           <td>110</td>
+                        </tr>
+                        <tr>
+                           <td>Iron</td>
+                           <td>mg</td>
+                           <td>13</td>
+                           <td>12</td>
+                        </tr>
+                        <tr>
+                           <td>Magnesium</td>
+                           <td>mg</td>
+                           <td>89</td>
+                           <td>82</td>
+                        </tr>
+                        <tr>
+                           <td>Phosphorus</td>
+                           <td>mg</td>
+                           <td>403</td>
+                           <td>371</td>
+                        </tr>
+                        <tr>
+                           <td>Potassium</td>
+                           <td>mg</td>
+                           <td>1250</td>
+                           <td>1150</td>
+                        </tr>
+                        <tr>
+                           <td>Selenium</td>
+                           <td>µg</td>
+                           <td>28</td>
+                           <td>26</td>
+                        </tr>
+                        <tr>
+                           <td>Zinc</td>
+                           <td>mg</td>
+                           <td>13</td>
+                           <td>12</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+         <div id="rutfDivider3"></div>
+         <div id="rutfHead5Box">
+            <div>
+               <img
+                  src="https://www.edesianutrition.org/wp-content/uploads/2026/08/mother-feeding-rutf-1.png"
+                  alt="Breastfeeding Icon"
+               />
+               <div>
+                  <h3 data-i18n="bf_excl_title" id="font-bold">
+                     Exclusive Breastfeeding
+                  </h3>
+                  <p data-i18n="bf_excl_text" id="detail-font">
+                     Recommended for the first 6 months of life, and continued
+                     breastfeeding is recommended for up to two years or beyond.
+                  </p>
+               </div>
+            </div>
+            <div>
+               <img
+                  src="https://www.edesianutrition.org/wp-content/uploads/2026/08/alert-rutf-1.png"
+                  alt="Breastfeeding Icon"
+               />
+               <div>
+                  <h3 data-i18n="bf_med_title" id="font-bold">
+                     Use Under Medical Supervision
+                  </h3>
+                  <div id="detail-font">
+                     <div data-i18n="bf_med_text1">
+                        Intended as the sole source of nutrition in conjunction
+                        with breastfeeding. NOT TO BE USED FOR NASOGASTRIC TUBE
+                        (NG TUBE) ADMINISTRATION.
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div>
+               <img
+                  src="https://www.edesianutrition.org/wp-content/uploads/2026/08/Peanuts_bullet-p7kSXyZh.png"
+                  alt="Breastfeeding Icon"
+               />
+               <div>
+                  <h3 data-i18n="bf_discard_title" id="font-bold">
+                     Once opened, discard after 24 hours.
+                  </h3>
+                  <div id="detail-font">
+                     <div data-i18n="bf_storage_text1">
+                        Best stored below 30°C, in a dry place, away from direct
+                        sunlight. Packaged in a protective atmosphere.
+                     </div>
+
+                     <div>
+                        <b data-i18n="bf_net_weight_label">Net weight:</b> 92g
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="rutfDivider4"></div>
+         <div id="rutfHead6Box" class="notranslate" translate="no">
+            <div>
+               <p>MANUFACTURED BY:</p>
+               <h5>EDESIA</h5>
+               <p>NORTH KINGSTOWN, RI 02852</p>
+               <!-- <p>COUNTRY OF ORIGIN: U.S.A.</p> -->
+               <p>
+                  <a
+                     href="https://www.edesianutrition.org/"
+                     style="
+                        text-decoration: none;
+                        color: #000;
+                        font-size: medium;
+                     "
+                     >edesianutrition.org</a
+                  >
+               </p>
+            </div>
+            <div id="product-sale-box">
+               <div id="rutfProductOfUsa"><h3>ORIGIN OF U.S.A.</h3></div>
+               <div id="rutfNotForSale"><h3>NOT FOR SALE</h3></div>
+            </div>
+         </div>
+         <!-- <div id="rutfHead7Box">
+      <h3>
+         RUTF
+         <p>®</p>
+      </h3>
+   </div> -->
+      </div>
+      <script>
+         (function () {
+            /* =========================================================
+       LANGUAGE DROPDOWN
+       Translations are static and baked into localTranslations
+       below, so switching languages is an instant, synchronous
+       text swap with no network calls. English is the default
+       language and all formatting/SVG icons remain in place.
+       ========================================================= */
+            console.log("hi");
+            const languageDropdown = document.getElementById(
+               "rutfLanguageDropdown",
+            );
+            const languageBtn = document.getElementById("languageBtn");
+            const languageText = document.getElementById("rutfLanguageText");
+            const languageOptions = document.querySelectorAll(
+               "#languageMenu > div",
+            );
+            const languageLogo = document.getElementById("languageLogo");
+            const protectedTranslationSelector =
+               "#rutfHead1Box, #rutfLanguageDropdown, #rutfAudioPlayerContainer, #rutfHead4Box, #rutfHead6Box";
+
+            const languageCodes = {
+               English: "en",
+               Arabic: "ar",
+               Spanish: "es",
+               Portuguese: "pt",
+               Swahili: "sw",
+               Hausa: "ha",
+               Yoruba: "yo",
+               Igbo: "ig",
+               Amharic: "am",
+               Oromo: "om",
+               Somali: "so",
+               Tigrinya: "ti",
+               Luganda: "lg",
+               Lingala: "ln",
+               Kikongo: "kg",
+               Kinyarwanda: "rw",
+               Malagasy: "mg",
+               Chichewa: "ny",
+               Nuer: "nus",
+               Dinka: "din",
+               Urdu: "ur",
+               Punjabi: "pa",
+               Sindhi: "sd",
+               Tagalog: "tl",
+               Quechua: "qu",
+               Kiche: "quc",
+               "Haitian Creole": "ht",
+               Twi: "tw",
+            };
+
+            let currentLanguageCode = "en";
+
+            function applyNoTranslateToProtectedSections() {
+               document
+                  .querySelectorAll(protectedTranslationSelector)
+                  .forEach((container) => {
+                     container.classList.add("notranslate");
+                     container.setAttribute("translate", "no");
+
+                     container.querySelectorAll("*").forEach((element) => {
+                        element.classList.add("notranslate");
+                        element.setAttribute("translate", "no");
+                     });
+                  });
+            }
+
+            applyNoTranslateToProtectedSections();
+
+            /* Every translatable string lives on a [data-i18n] element.
+       Translations are baked in ahead of time (no network calls),
+       so switching languages is an instant, synchronous text swap -
+       the same approach as multilingual-page.html's applyLanguage(). */
+            const i18nElements = document.querySelectorAll("[data-i18n]");
+            const originalI18nText = new Map();
+            i18nElements.forEach((el) =>
+               originalI18nText.set(el, el.textContent),
+            );
+            console.log(i18nElements)
+
+            const localTranslations = {
+               ar: {
+                  head2_title: "الأغذية العلاجية الجاهزة للاستخدام (RUTF)",
+                  head2_sachet: "1 كيس = 500 سعرة حرارية",
+                  head2_dose: "الجرعة الموصى بها: 150-185 سعرة حرارية/كجم/يوم",
+                  head2_perchild: "لكل طفل لمدة 4 إلى 8 أسابيع.",
+                  head2_mgmt:
+                     "لإدارة النظام الغذائي للأطفال الذين تزيد أعمارهم عن 6 أشهر والذين يعانون من سوء التغذية الحاد الوخيم دون مضاعفات طبية.",
+                  usage_heading: "تعليمات الاستخدام:",
+                  usage_no_water: "لا تضيف الماء",
+                  usage_no_heat: "لا تسخن",
+                  usage_wash: "غسل اليدين والعجن",
+                  usage_squeeze: "الضغط وتناول الطعام",
+                  usage_feed: "إطعام الطفل",
+                  usage_supplement: "تكملة مع الرضاعة الطبيعية",
+                  ingredients_heading: "المكونات:",
+                  ingredients_text:
+                     "مزيج من الزيوت النباتية غير المهدرجة (يحتوي على واحد أو أكثر مما يلي: النخيل، وفول الصويا، وزيت الكانولا)، والسكر، ومسحوق مصل اللبن، ومسحوق الحليب الخالي من الدسم، والفول السوداني، ودقيق الصويا، والزيت النباتي المهدرج بالكامل (النخيل)، وخليط الفيتامينات والمعادن.",
+                  allergens_text:
+                     "مسببات الحساسية: الفول السوداني، الحليب، الصويا. قد تحتوي على آثار الغلوتين.",
+                  bf_excl_title: "الرضاعة الطبيعية الحصرية",
+                  bf_excl_text:
+                     "يوصى به للأشهر الستة الأولى من الحياة، ويوصى بمواصلة الرضاعة الطبيعية لمدة تصل إلى عامين أو أكثر.",
+                  bf_med_title: "يستخدم تحت إشراف طبي",
+                  bf_med_text1:
+                     "مخصص كمصدر وحيد للتغذية بالتزامن مع الرضاعة الطبيعية.",
+                  bf_med_text2:
+                     "لا يستخدم لإدارة الأنبوب الأنفي المعدي (NG tube).",
+                  bf_discard_title: "بمجرد فتحه، تخلص منه بعد 24 ساعة.",
+                  bf_storage_text1:
+                     "من الأفضل تخزينه في درجة حرارة أقل من 30 درجة مئوية، في مكان جاف، بعيداً عن أشعة الشمس المباشرة",
+                  bf_storage_text2: "معبأة في جو وقائي.",
+                  bf_net_weight_label: "الوزن الصافي:",
+               },
+               es: {
+                  head2_title: "Alimentos terapéuticos listos para usar (RUTF)",
+                  head2_sachet: "1 SOBRE = 500 kcal",
+                  head2_dose: "Recomendación de dosis: 150-185 kcal/kg/día",
+                  head2_perchild: "por niño durante 4 a 8 semanas.",
+                  head2_mgmt:
+                     "Para el manejo dietético de niños mayores de 6 meses con Desnutrición Aguda Severa sin complicaciones médicas.",
+                  usage_heading: "Instrucciones de uso:",
+                  usage_no_water: "No agregue agua",
+                  usage_no_heat: "No calentar",
+                  usage_wash: "Lávese las manos y amase",
+                  usage_squeeze: "Exprimir y comer",
+                  usage_feed: "alimentar al niño",
+                  usage_supplement: "Complementar con la lactancia materna",
+                  ingredients_heading: "Ingredientes:",
+                  ingredients_text:
+                     "Mezcla de aceite vegetal no hidrogenado (contiene uno o más de los siguientes: palma, soja, canola), azúcar, suero en polvo, leche descremada en polvo, maní, harina de soja, aceite vegetal totalmente hidrogenado (palma), premezcla de vitaminas y minerales.",
+                  allergens_text:
+                     "ALÉRGENOS: maní, leche, soja. Puede contener trazas de gluten.",
+                  bf_excl_title: "Lactancia Materna Exclusiva",
+                  bf_excl_text:
+                     "Recomendado durante los primeros 6 meses de vida y se recomienda continuar con la lactancia materna hasta los dos años o más.",
+                  bf_med_title: "Uso bajo supervisión médica",
+                  bf_med_text1:
+                     "Diseñado como única fuente de nutrición junto con la lactancia materna.",
+                  bf_med_text2:
+                     "No debe utilizarse para la administración por sonda nasogástrica (sonda NG).",
+                  bf_discard_title:
+                     "Una vez abierto, desechar después de 24 horas.",
+                  bf_storage_text1:
+                     "Es mejor conservarlo a menos de 30 °C, en un lugar seco y alejado de la luz solar directa.",
+                  bf_storage_text2: "Envasado en atmósfera protectora.",
+                  bf_net_weight_label: "Peso neto:",
+               },
+               pt: {
+                  head2_title: "Alimento Terapêutico Pronto para Uso (RUTF)",
+                  head2_sachet: "1 SAQUETE = 500 kcal",
+                  head2_dose: "Dose recomendada: 150–185 kcal/kg/dia",
+                  head2_perchild: "por criança durante 4 a 8 semanas.",
+                  head2_mgmt:
+                     "Para o manejo dietético de crianças maiores de 6 meses com Desnutrição Aguda Grave sem complicações médicas.",
+                  usage_heading: "Instruções de uso:",
+                  usage_no_water: "Não adicione água",
+                  usage_no_heat: "Não aqueça",
+                  usage_wash: "Lave as mãos e amasse",
+                  usage_squeeze: "Aperte e coma",
+                  usage_feed: "Alimentar criança",
+                  usage_supplement: "Suplemento com amamentação",
+                  ingredients_heading: "Ingredientes:",
+                  ingredients_text:
+                     "Mistura de óleo vegetal não hidrogenado (contém um ou mais dos seguintes: palma, soja, canola), açúcar, soro de leite em pó, leite em pó desnatado, amendoim, farinha de soja, óleo vegetal totalmente hidrogenado (palma), pré-mistura de vitaminas e minerais.",
+                  allergens_text:
+                     "ALERGÉNIOS: amendoim, leite, soja. Pode conter vestígios de glúten.",
+                  bf_excl_title: "Amamentação Exclusiva",
+                  bf_excl_text:
+                     "Recomendado durante os primeiros 6 meses de vida, e a amamentação continuada é recomendada até os dois anos ou mais.",
+                  bf_med_title: "Use sob supervisão médica",
+                  bf_med_text1:
+                     "Pretendido como a única fonte de nutrição em conjunto com a amamentação.",
+                  bf_med_text2:
+                     "Não deve ser usado para administração de sonda nasogástrica (sonda NG).",
+                  bf_discard_title: "Depois de aberto, descarte após 24 horas.",
+                  bf_storage_text1:
+                     "Melhor armazenado abaixo de 30°C, em local seco, longe da luz solar direta",
+                  bf_storage_text2: "Embalado em atmosfera protetora.",
+                  bf_net_weight_label: "Peso líquido:",
+               },
+               sw: {
+                  head2_title: "Chakula Kilicho Tayari Kutumia (RUTF)",
+                  head2_sachet: "SACHET 1 = 500 kcal",
+                  head2_dose: "Mapendekezo ya kipimo: 150-185 kcal / kg / siku",
+                  head2_perchild: "kwa mtoto kwa wiki 4 hadi 8.",
+                  head2_mgmt:
+                     "Kwa ajili ya usimamizi wa lishe kwa watoto wakubwa zaidi ya miezi 6 wenye Utapiamlo Mkali usio na matatizo ya kiafya.",
+                  usage_heading: "Maagizo ya matumizi:",
+                  usage_no_water: "Usiongeze Maji",
+                  usage_no_heat: "Usipashe joto",
+                  usage_wash: "Nawa Mikono & Kanda",
+                  usage_squeeze: "Finya & Kula",
+                  usage_feed: "Lisha Mtoto",
+                  usage_supplement: "Nyongeza kwa Kunyonyesha",
+                  ingredients_heading: "Viungo:",
+                  ingredients_text:
+                     "Mchanganyiko wa mafuta ya mboga isiyo na hidrojeni (ina moja au zaidi ya yafuatayo: mitende, soya, kanola), sukari, unga wa whey, unga wa maziwa usio na mafuta, karanga, unga wa soya, mafuta ya mboga yenye hidrojeni (mitende), mchanganyiko wa vitamini na madini.",
+                  allergens_text:
+                     "ALLERGENS: karanga, maziwa, soya. Huenda ikawa na athari za gluteni.",
+                  bf_excl_title: "Unyonyeshaji wa Maziwa ya Mama Pekee",
+                  bf_excl_text:
+                     "Inapendekezwa kwa miezi 6 ya kwanza ya maisha, na kuendelea kunyonyesha kunapendekezwa hadi miaka miwili au zaidi.",
+                  bf_med_title: "Tumia Chini ya Uangalizi wa Matibabu",
+                  bf_med_text1:
+                     "Inakusudiwa kama chanzo pekee cha lishe kwa kushirikiana na kunyonyesha.",
+                  bf_med_text2:
+                     "Haipaswi kutumiwa kwa utawala wa Nasogastric Tube (NG tube).",
+                  bf_discard_title:
+                     "Baada ya kufunguliwa, tupa baada ya masaa 24.",
+                  bf_storage_text1:
+                     "Imehifadhiwa vizuri chini ya 30 ° C, mahali pakavu, mbali na jua moja kwa moja",
+                  bf_storage_text2: "Imefungwa katika mazingira ya kinga.",
+                  bf_net_weight_label: "Uzito wa jumla:",
+               },
+               ha: {
+                  head2_title: "Shirye-shiryen Abincin Jiyya (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal",
+                  head2_dose: "Shawarar kashi: 150-185 kcal / kg / rana",
+                  head2_perchild: "kowane yaro na tsawon makonni 4 zuwa 8.",
+                  head2_mgmt:
+                     "Don kula da abinci na yara waɗanda suka girmi watanni 6 tare da Mummunan rashin abinci mai gina jiki ba tare da rikitarwa na likita ba.",
+                  usage_heading: "Umarnin amfani:",
+                  usage_no_water: "Karka Kara Ruwa",
+                  usage_no_heat: "Kada Ku Zafi",
+                  usage_wash: "Wanke Hannu & Knead",
+                  usage_squeeze: "Matsi & Ci",
+                  usage_feed: "Ciyar da Yaro",
+                  usage_supplement: "Kari Tare Da Shayarwa",
+                  ingredients_heading: "Sinadaran:",
+                  ingredients_text:
+                     "Cakuda da man kayan lambu da ba na ruwa ba (ya ƙunshi ɗaya ko fiye daga cikin masu zuwa: dabino, waken soya, canola), sukari, foda mai laushi, foda mara ƙiba, gyada, garin soya, man kayan lambu mai cikakken hydrogenated ( dabino), bitamin da ma'adinai premix.",
+                  allergens_text:
+                     "ALJAN: gyada, madara, waken soya. Zai iya ƙunsar alamun alkama.",
+                  bf_excl_title: "Shayarwa Na Musamman",
+                  bf_excl_text:
+                     "An ba da shawarar ga farkon watanni 6 na rayuwa, kuma ana ba da shawarar ci gaba da shayarwa har zuwa shekaru biyu ko sama da haka.",
+                  bf_med_title: "Amfani Karkashin Kula da Lafiya",
+                  bf_med_text1:
+                     "An yi niyya a matsayin kawai tushen abinci mai gina jiki tare da shayarwa.",
+                  bf_med_text2:
+                     "Ba za a yi amfani da Nasogastric Tube (NG tube).",
+                  bf_discard_title: "Da zarar an buɗe, jefar bayan awanni 24.",
+                  bf_storage_text1:
+                     "Mafi kyawun adana a ƙasa da 30 ° C, a cikin busasshen wuri, nesa da hasken rana kai tsaye",
+                  bf_storage_text2: "Kunshe cikin yanayin tsaro.",
+                  bf_net_weight_label: "Cikakken nauyi:",
+               },
+               ig: {
+                  head2_title: "Nri ọgwụgwọ adịla njikere iji (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal",
+                  head2_dose: "Nkwado dose: 150-185 kcal / kg / ụbọchị",
+                  head2_perchild: "kwa nwa maka izu 4 ruo 8.",
+                  head2_mgmt:
+                     "Maka nlekọta nri nke ụmụaka karịrị ọnwa isii nwere nnukwu erighị ihe na-edozi ahụ na-enweghị nsogbu ahụike.",
+                  usage_heading: "Ntuziaka ojiji:",
+                  usage_no_water: "Etinyela mmiri",
+                  usage_no_heat: "Emela ikpo ọkụ",
+                  usage_wash: "Saa aka & igwakorita",
+                  usage_squeeze: "Fanye & rie",
+                  usage_feed: "Nye Nwata nri",
+                  usage_supplement: "Mmeju na inye ara",
+                  ingredients_heading: "Efrata:",
+                  ingredients_text:
+                     "Ngwakọta mmanụ ihe oriri na-abụghị hydrogenated (nwere otu ma ọ bụ karịa n'ime ihe ndị a: nkwụ, soybean, canola), sugar, whey ntụ ntụ, mmiri ara ehi na-adịghị abụba, ahụekere, ntụ ọka soy, mmanụ nri nwere hydrogenated zuru oke (nkwụ), vitamin na mineral premix.",
+                  allergens_text:
+                     "Allergens: ahụekere, mmiri ara ehi, soy. Nwere ike ịnwe akara gluten.",
+                  bf_excl_title: "Naanị inye ara",
+                  bf_excl_text:
+                     "Akwadoro maka ọnwa isii mbụ nke ndụ, ma nọgide na-enye nwa ara ka akwadoro ruo afọ abụọ ma ọ bụ karịa.",
+                  bf_med_title: "Jiri n'okpuru nlekọta ahụike",
+                  bf_med_text1:
+                     "Ezubere ka ọ bụrụ naanị isi iyi nri na-enye aka yana inye nwa ara.",
+                  bf_med_text2:
+                     "Agaghị eji ya maka nchịkwa Nasogastric Tube (NG tube).",
+                  bf_discard_title:
+                     "Ozugbo emepere, tụfuo mgbe awa 24 gachara.",
+                  bf_storage_text1:
+                     "Kachasị mma echekwara n'okpuru 30 Celsius, n'ebe kpọrọ nkụ, na-anọghị na ìhè anyanwụ kpọmkwem",
+                  bf_storage_text2: "Ejiri ya na ikuku nchebe.",
+                  bf_net_weight_label: "Nha ịbụ:",
+               },
+               om: {
+                  head2_title: "Nyaata Wal'aansaa Fayyadamuuf Qophaa'e (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal",
+                  head2_dose: "Gorsi doosiin: 150–185 kcal/kg/guyyaa",
+                  head2_perchild: "daa’ima tokkoof torban 4 hanga 8tti.",
+                  head2_mgmt:
+                     "Bulchiinsa nyaataa daa’imman ji’a 6 ol ta’anii fi Hanqina Nyaataa Cimaa (Severe Acute Malnutrition) qabaniif rakkoo fayyaa malee.",
+                  usage_heading: "Qajeelfama Itti Fayyadamaa:",
+                  usage_no_water: "Bishaan Hin Dabaluu",
+                  usage_no_heat: "Hin Ho'inaa",
+                  usage_wash: "Harka Dhiqachuu & Daakuun",
+                  usage_squeeze: "Micciiruun & Nyaachuu",
+                  usage_feed: "Mucaa Nyaachisaa",
+                  usage_supplement: "Dabalata Harma Hoosisuu Waliin",
+                  ingredients_heading: "Wantoota barbaachisan:",
+                  ingredients_text:
+                     "Walnyaatinsa zayita kuduraa haayidiroojiinii hin qabne (kanneen armaan gadii keessaa tokko yookiin isaa ol of keessaa qaba: meexxii, xaafii, kaanoolaa), sukkaara, daakuu qamadii, daakuu aannan cooma hin qabne, boqqolloo, daakuu xaafii, zayita kuduraa guutummaatti haayidiroojiinii hin qabne (paam), vitaaminii fi albuuda dursee makaa.",
+                  allergens_text:
+                     "ALERGENS: boqqolloo, aannan, xaafii. Argannoo giluteenii qabaachuu danda'a.",
+                  bf_excl_title: "Harma Hoosisuu Qofa",
+                  bf_excl_text:
+                     "Ji’oota 6 jalqabaa jireenyaaf kan gorfamu yoo ta’u, hanga waggaa lamaa fi sanaa ol harma hoosisuun itti fufuun ni gorfama.",
+                  bf_med_title: "To’annoo Yaalaa Jalatti Fayyadamaa",
+                  bf_med_text1:
+                     "Harma hoosisuu wajjin walqabatee madda soorataa tokkicha ta’ee kan yaadame.",
+                  bf_med_text2:
+                     "Bulchiinsa Nasogastric Tube (NG tube) tiif akka hin fayyadamne.",
+                  bf_discard_title:
+                     "Erga banamee booda sa'aatii 24 booda gataa.",
+                  bf_storage_text1:
+                     "30°C gadi, bakka goggogaa, ifa aduu kallattiin irraa fagaatee yoo kuufame gaarii dha",
+                  bf_storage_text2: "Haala eegumsaa keessatti kan kuufame.",
+                  bf_net_weight_label: "Ulfaatina qulqulluu:",
+               },
+               so: {
+                  head2_title:
+                     "Cunto-Daawaynta U Diyaarsan In La Isticmaalo (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal",
+                  head2_dose: "Qiyaasta qiyaasta: 150-185 kcal/kg/maalintii",
+                  head2_perchild: "ilmo kasta 4 ilaa 8 toddobaad.",
+                  head2_mgmt:
+                     "Loogu talagalay maareynta cuntada carruurta ka weyn 6 bilood ee leh nafaqo-xumo daran oo daran oo aan lahayn dhibaatooyin caafimaad.",
+                  usage_heading: "Tilmaamaha Isticmaalka:",
+                  usage_no_water: "Biyo Haku Darin",
+                  usage_no_heat: "Ha kululayn",
+                  usage_wash: "Gacmaha dhaq oo cajiin",
+                  usage_squeeze: "Tuuji oo Cun",
+                  usage_feed: "Quudi ilmaha",
+                  usage_supplement: "Kaabista Naasnuujinta",
+                  ingredients_heading: "Waxyaabaha ay ka kooban:",
+                  ingredients_text:
+                     "Isku darka saliidda khudradda ee aan haydaroojin lahayn (waxaa ku jira hal ama in ka badan oo kuwan soo socda: timir, soybean, canola), sonkor, budada caanaha, budada caanaha aan dufanka lahayn, lawska, bur soy, saliid khudradeed oo si buuxda hydrogenated (timirta), fitamiin iyo macdanta premix.",
+                  allergens_text:
+                     "Xasaasiyadda: lawska, caano, soy. Waxa ku jiri kara raadad gluten.",
+                  bf_excl_title: "Naasnuujin gaar ah",
+                  bf_excl_text:
+                     "Lagu taliyay 6da bilood ee ugu horeeya nolosha, iyo sii wadida naas nuujinta ayaa lagula talinayaa ilaa laba sano ama ka badan.",
+                  bf_med_title: "Isticmaal Kormeer Caafimaad",
+                  bf_med_text1:
+                     "Loogu tala galay inay noqoto isha keliya ee nafaqeynta iyadoo lala kaashanayo naas nuujinta.",
+                  bf_med_text2:
+                     "Aan loo isticmaalin maamulka tuubada Nasogastric (NG tube).",
+                  bf_discard_title: "Marka la furo, tuur 24 saacadood ka dib.",
+                  bf_storage_text1:
+                     "Sida ugu fiican ee lagu kaydiyo wax ka hooseeya 30°C, meel qalalan, kana fog iftiinka qoraxda",
+                  bf_storage_text2: "Baakad ku jirta jawi ilaalin ah.",
+                  bf_net_weight_label: "Miisaanka saafiga ah:",
+               },
+               lg: {
+                  head2_title: "Emmere Entegefu Okukozesebwa (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal",
+                  head2_dose: "Dozi esengekeddwa: 150–185 kcal/kg/olunaku",
+                  head2_perchild: "buli mwana okumala wiiki 4 ku 8.",
+                  head2_mgmt:
+                     "Ku lw’okuddukanya emmere y’abaana abasukka mu myezi 6 abalina Severe Acute Malnutrition nga tebalina buzibu bwa bujjanjabi.",
+                  usage_heading: "Ebiragiro by'okukozesa:",
+                  usage_no_water: "Togattako Mazzi",
+                  usage_no_heat: "Tobugumya",
+                  usage_wash: "Okunaaba Engalo & Okufuka",
+                  usage_squeeze: "Squeeze & Lya",
+                  usage_feed: "Liisa Omwana",
+                  usage_supplement: "Supplement Nga Erimu Okuyonsa",
+                  ingredients_heading: "Ebirungo:",
+                  ingredients_text:
+                     "Omugatte gw’amafuta g’enva endiirwa agataliimu haidrojeni (mulimu ekimu oba ebisingawo ku bino wammanga: enkindu, soya, canola), ssukaali, butto w’omubisi gw’enjuki, butto w’amata agataliimu masavu, entangawuuzi, obuwunga bwa soya, amafuta g’enva endiirwa agalimu haidrojeni mu bujjuvu (enkindu), vitamiini n’eby’obuggagga eby’omu ttaka premix.",
+                  allergens_text:
+                     "ALERGENS: entangawuuzi, amata, soya. Ayinza okubaamu obutonotono bwa gluten.",
+                  bf_excl_title: "Okuyonsa Okwokka",
+                  bf_excl_text:
+                     "Kirungi okumala emyezi 6 egisooka egy’obulamu, era okugenda mu maaso n’okuyonsa kirungi okumala emyaka ebiri oba okusingawo.",
+                  bf_med_title: "Kozesa Wansi w’okulabirirwa kw’abasawo",
+                  bf_med_text1:
+                     "Kigendereddwamu ng’ensibuko yokka ey’emmere nga ekwataganye n’okuyonsa.",
+                  bf_med_text2:
+                     "Obutakozesebwa mu kugaba Nasogastric Tube (NG tube).",
+                  bf_discard_title:
+                     "Bw’omala okuggulawo, suula oluvannyuma lw’essaawa 24.",
+                  bf_storage_text1:
+                     "Kisinga kuterekebwa wansi wa 30°C, mu kifo ekikalu, ewala okuva ku musana obutereevu",
+                  bf_storage_text2: "Epakibwa mu mbeera ey’obukuumi.",
+                  bf_net_weight_label: "Obuzito obutuufu:",
+               },
+               ln: {
+                  head2_title:
+                     "Bilei oyo ekoki kosalelama mpo na kosalisa bato (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal ya monene",
+                  head2_dose: "Toli ya dose: 150–185 kcal/kg/mokolo",
+                  head2_perchild: "mwana moko na boumeli ya pɔsɔ 4 tii 8.",
+                  head2_mgmt:
+                     "Pona gestion alimentaire ya bana oyo baleki 6 mois na Malnutrition aiguë Grave sans complications médicales.",
+                  usage_heading: "Malako ya kosalela:",
+                  usage_no_water: "Kobakisa Mai Te",
+                  usage_no_heat: "Kopelisa molunge te",
+                  usage_wash: "Kosukola Maboko & Kosakola",
+                  usage_squeeze: "Kofina & Kolia",
+                  usage_feed: "Koleisa Mwana",
+                  usage_supplement: "Supplément Na Komelisa Mabɛlɛ",
+                  ingredients_heading: "Biloko oyo basalelaka:",
+                  ingredients_text:
+                     "Mélange ya mafuta ya ndunda oyo ezali na hydrogène te (ezali na moko to mingi ya oyo elandi : palmier, soya, canola), sukali, poudre ya mafuta ya nzoi, poudre ya miliki oyo ezali na mafuta te, manteka, farine ya soya, mafuta ya ndunda oyo ezali na hydrogène mobimba (palme), prémix ya vitamine mpe minerais.",
+                  allergens_text:
+                     "BA ALLERGENS: manteka, miliki, soya. Ekoki kozala na mwa ndambo ya gluten.",
+                  bf_excl_title: "Komelisa bana Mabɛlɛ kaka",
+                  bf_excl_text:
+                     "Esengami mpo na sanza 6 ya yambo ya bomoi, mpe kokoba komelisa bana mabele esengami kino mibu mibale to koleka.",
+                  bf_med_title: "Salelá Na nse ya Bokengeli ya Monganga",
+                  bf_med_text1:
+                     "Ekanamaki lokola liziba se moko ya bilei elongo na komelisa bana mabele.",
+                  bf_med_text2:
+                     "Esengeli te kosalelama mpo na bopesi ya Tube Nasogastrique (tube NG).",
+                  bf_discard_title:
+                     "Soki ofungoli, bwaka yango nsima ya ngonga 24.",
+                  bf_storage_text1:
+                     "Ebombami malamu na nse ya 30°C, na esika ya kokauka, mosika na pole ya moi mbala moko",
+                  bf_storage_text2: "Emballage na ambiance ya protection.",
+                  bf_net_weight_label: "Kilo ya net:",
+               },
+               kg: {
+                  head2_title:
+                     "Madya ya Kubelula ya Me Yilama na Kusadila (RUTF)",
+                  head2_sachet: "1 SAKIT = 500 kcal",
+                  head2_dose: "150-185 kcal/kg/kilumbu",
+                  head2_perchild: "na mwana mosi na bamposo 4 tii na 8.",
+                  head2_mgmt:
+                     "Samu na lusadusu ya madia ya bana yina me luta bangonda 6 yina kele na Malnutrition Acute Severe kukonda ba mpasi ya kimbevo.",
+                  usage_heading: "Malongi ya kusadila:",
+                  usage_no_water: "Kuyika ve Masa",
+                  usage_no_heat: "Kuyoka ve tiya",
+                  usage_wash: "Sukula Maboko mpi Bumba",
+                  usage_squeeze: "Fina & Dia",
+                  usage_feed: "Didisa mwana",
+                  usage_supplement: "Kuyidika Na Kupesa Mabele",
+                  ingredients_heading: "Bisadilu:",
+                  ingredients_text:
+                     "Kuvukisa mafuta ya ndunda yina kele ve na hydrogène (yina kele na mosi to mingi ya bima yai: nzungu ya nzioko, soya, canola), sukadi, fufu ya fufu ya ngulu, fufu ya miliki ya kukonda mafuta, nzungu ya nzungu, farine ya soya, mafuta ya ndunda yina kele ve ti hydrogène (nzungu ya nzioko), premix ya vitamine mpi ya minerale.",
+                  allergens_text:
+                     "ALLERGENS: nzungu, miliki, soya. Lenda vanda ti bima ya gluten.",
+                  bf_excl_title: "Kupesa mabele kaka",
+                  bf_excl_text:
+                     "Bo ke siamisaka yo na bangonda 6 ya ntete ya luzingu, mpi bo ke siamisaka kulanda kunwisa mabele tii na bamvula zole to kuluta.",
+                  bf_med_title: "Sadila yo na nsi ya lutwadisu ya minganga",
+                  bf_med_text1:
+                     "Bo ke yindulaka nde yo kele nto mosi kaka ya madia na kuwakana ti kunwisa mabele.",
+                  bf_med_text2:
+                     "Ke difwete sadilwa ko muna nlongo mia Tube Nasogástrico (Tube NG).",
+                  bf_discard_title:
+                     "Kana nge me kangula yo, losa yo na nima ya bangunga 24.",
+                  bf_storage_text1:
+                     "Yo kele mbote na kubumba yo na nsi ya 30°C, na kisika ya kuyuma, ntama ti nsemo ya ntangu",
+                  bf_storage_text2:
+                     "Bo ke kangaka yo na kisika yina bo ke taninaka.",
+                  bf_net_weight_label: "Kizitu ya mpamba:",
+               },
+               rw: {
+                  head2_title: "Witegure-Gukoresha Ibiryo bivura (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal",
+                  head2_dose: "Icyifuzo cya Dose: 150–185 kcal / kg / kumunsi",
+                  head2_perchild: "kuri buri mwana ibyumweru 4 kugeza 8.",
+                  head2_mgmt:
+                     "Kubijyanye nimirire yabana barengeje amezi 6 bafite imirire mibi ikabije nta kibazo cyubuvuzi.",
+                  usage_heading: "Amabwiriza yo gukoresha:",
+                  usage_no_water: "Ntukongere Amazi",
+                  usage_no_heat: "Ntugashyuhe",
+                  usage_wash: "Gukaraba Amaboko & Kupfukama",
+                  usage_squeeze: "Gufata & Kurya",
+                  usage_feed: "Kugaburira Umwana",
+                  usage_supplement: "Inyongera hamwe no konsa",
+                  ingredients_heading: "Ibigize:",
+                  ingredients_text:
+                     "Uruvange rwamavuta yibimera adafite hydrogène (arimo kimwe cyangwa byinshi muribi bikurikira: imikindo, soya, canola), isukari, ifu yifu, ifu y amata adafite amavuta, ibishyimbo, ifu ya soya, amavuta yimboga ya hydrogène yuzuye (palm), vitamine na minisiteri yambere.",
+                  allergens_text:
+                     "ALLERGENS: ibishyimbo, amata, soya. Birashobora kuba birimo ibimenyetso bya gluten.",
+                  bf_excl_title: "Kwonsa bidasanzwe",
+                  bf_excl_text:
+                     "Basabwe kumezi 6 yambere yubuzima, kandi gukomeza konsa birasabwa kugeza kumyaka ibiri cyangwa irenga.",
+                  bf_med_title: "Koresha Mugenzuzi Wubuvuzi",
+                  bf_med_text1:
+                     "Biteganijwe nkisoko yonyine yimirire ifatanije no konsa.",
+                  bf_med_text2:
+                     "Ntabwo ugomba gukoreshwa mubuyobozi bwa Nasogastric Tube (NG tube).",
+                  bf_discard_title: "Bimaze gufungura, guta nyuma yamasaha 24.",
+                  bf_storage_text1:
+                     "Byabitswe neza munsi ya 30 ° C, ahantu humye, kure yizuba ryizuba",
+                  bf_storage_text2: "Bipakiwe mukirere gikingira.",
+                  bf_net_weight_label: "Uburemere bwuzuye:",
+               },
+               mg: {
+                  head2_title: "Sakafo fitsaboana efa vonona (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal",
+                  head2_dose: "Torohevitra fatra: 150–185 kcal/kg/andro",
+                  head2_perchild:
+                     "isaky ny zaza mandritra ny 4 ka hatramin’ny 8 herinandro.",
+                  head2_mgmt:
+                     "Ho an'ny fitantanana ny sakafo ho an'ny zaza mihoatra ny 6 volana miaraka amin'ny tsy fahampian-tsakafo mahery vaika tsy misy fahasarotana ara-pitsaboana.",
+                  usage_heading: "Torolàlana fampiasana:",
+                  usage_no_water: "Aza asiana rano",
+                  usage_no_heat: "Aza Mafana",
+                  usage_wash: "Sasao tanana & mametafeta",
+                  usage_squeeze: "Potika & Hanina",
+                  usage_feed: "Fahano Zaza",
+                  usage_supplement: "Fanampiny amin'ny fampinonoana",
+                  ingredients_heading: "Ingredients:",
+                  ingredients_text:
+                     "Afangaro ny menaka legioma tsy misy hydrogène (misy iray na maromaro amin'ireto manaraka ireto: rofia, soja, canola), siramamy, vovo-dronono, vovo-dronono tsy matavy, voanjo, lafarinina soja, menaka legioma feno hydrogène (palm), premix vitaminina sy mineraly.",
+                  allergens_text:
+                     "ALLERGEN: voanjo, ronono, soja. Mety misy soritra gluten.",
+                  bf_excl_title: "Fampinonoana manokana",
+                  bf_excl_text:
+                     "Atolotra ho an'ny 6 volana voalohany amin'ny fiainana, ary ny fanohizana ny fampinonoana dia atolotra hatramin'ny roa taona na mihoatra.",
+                  bf_med_title: "Ampiasao eo ambany fanaraha-mason'ny mpitsabo",
+                  bf_med_text1:
+                     "Natao ho hany loharanon-tsakafo miaraka amin'ny fampinonoana.",
+                  bf_med_text2:
+                     "Tsy azo ampiasaina amin'ny fitantanana Nasogastric Tube (NG tube).",
+                  bf_discard_title: "Rehefa misokatra dia ario afaka 24 ora.",
+                  bf_storage_text1:
+                     "Ny tsara indrindra dia tehirizina eo ambanin'ny 30 ° C, amin'ny toerana maina, lavitry ny tara-masoandro mivantana",
+                  bf_storage_text2: "Fonosana ao anaty rivo-piainana miaro.",
+                  bf_net_weight_label: "Lanja afa-karatsaka:",
+               },
+               tl: {
+                  head2_title: "Ready-to-Use Therapeutic Food (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal",
+                  head2_dose: "Rekomendasyon ng dosis: 150–185 kcal/kg/araw",
+                  head2_perchild: "bawat bata sa loob ng 4 hanggang 8 linggo.",
+                  head2_mgmt:
+                     "Para sa pandiyeta na pamamahala ng mga batang mas matanda sa 6 na buwan na may Severe Acute Malnutrition na walang mga medikal na komplikasyon.",
+                  usage_heading: "Mga Tagubilin sa Paggamit:",
+                  usage_no_water: "Huwag Magdagdag ng Tubig",
+                  usage_no_heat: "Huwag Painitin",
+                  usage_wash: "Maghugas ng Kamay at Masahin",
+                  usage_squeeze: "Pisil at Kumain",
+                  usage_feed: "Pakainin Bata",
+                  usage_supplement: "Supplement Sa Pagpapasuso",
+                  ingredients_heading: "Mga sangkap:",
+                  ingredients_text:
+                     "Blend ng non-hydrogenated vegetable oil (naglalaman ng isa o higit pa sa mga sumusunod: palm, soybean, canola), asukal, whey powder, nonfat milk powder, mani, soy flour, fully hydrogenated vegetable oil (palm), bitamina at mineral premix.",
+                  allergens_text:
+                     "ALLERGENS: mani, gatas, toyo. Maaaring naglalaman ng mga bakas ng gluten.",
+                  bf_excl_title: "Eksklusibong Pagpapasuso",
+                  bf_excl_text:
+                     "Inirerekomenda para sa unang 6 na buwan ng buhay, at ang patuloy na pagpapasuso ay inirerekomenda hanggang sa dalawang taon o higit pa.",
+                  bf_med_title: "Gamitin sa Ilalim ng Medikal na Pangangasiwa",
+                  bf_med_text1:
+                     "Inilaan bilang ang tanging pinagmumulan ng nutrisyon kasabay ng pagpapasuso.",
+                  bf_med_text2:
+                     "Hindi dapat gamitin para sa pangangasiwa ng Nasogastric Tube (NG tube).",
+                  bf_discard_title:
+                     "Kapag nabuksan, itapon pagkatapos ng 24 na oras.",
+                  bf_storage_text1:
+                     "Pinakamahusay na nakaimbak sa ibaba 30°C, sa isang tuyo na lugar, malayo sa direktang sikat ng araw",
+                  bf_storage_text2:
+                     "Naka-package sa isang proteksiyon na kapaligiran.",
+                  bf_net_weight_label: "Net na timbang:",
+               },
+               qu: {
+                  head2_title: "Mikhuy hampinapaq wakichisqa (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal",
+                  head2_dose: "Dosis yuyaychakuy: 150–185 kcal/kg/p’unchaw",
+                  head2_perchild: "sapa wawaman 4manta 8 semanakama.",
+                  head2_mgmt:
+                     "Kay gestión dietética kaqpaq kay 6 killamanta aswan kuraq wawakunapaq kay Desnutrición Aguda Severa kaqwan mana complicaciones médicas kaqwan.",
+                  usage_heading: "Uywanapaq kamachiykuna:",
+                  usage_no_water: "Ama Yakuta Yapaychu",
+                  usage_no_heat: "Ama Ruphachiychu",
+                  usage_wash: "Maki Mayllana & Amasa",
+                  usage_squeeze: "Exprimir & Mikhuy",
+                  usage_feed: "Mikhuchiy Wawa",
+                  usage_supplement: "Suplemento Con Chuchuchiy",
+                  ingredients_heading: "Imakuna ruwanapaq:",
+                  ingredients_text:
+                     "Mana hidrogenadoyuq verdura aceitewan chaqrusqa (huk utaq achka kaykunamantam kachkan: palmera, soya, canola), azúcar, suero polvo, mana wirayuq leche polvo, cacahuete, soya harina, verdura aceite completamente hidrogenado (palma), vitamina hinaspa mineral premezcla.",
+                  allergens_text:
+                     "ALERGENOS: maní, leche, soya. Gluten nisqapa rastrochankunapas kanmanmi.",
+                  bf_excl_title: "Sapallan ñuñuchiy",
+                  bf_excl_text:
+                     "Ñawpaq 6 killa kawsaypaq yuyaychakun, chanta ñuñuchiytapuni iskay watakama utaq aswanta.",
+                  bf_med_title: "Utilizar Bajo Supervisión Médica",
+                  bf_med_text1:
+                     "ñuñuchiywan kuskalla mikhuypa paqariynin hina yuyasqa.",
+                  bf_med_text2:
+                     "Mana Tubo Nasogástrico (tubo NG) nisqa quypaq llamk’achinapaqchu.",
+                  bf_discard_title:
+                     "Kichasqaña kaptinqa 24 horasmanta wischuy.",
+                  bf_storage_text1:
+                     "Aswan allinqa 30°C urapi waqaychasqa, ch’akipi, intipa chiqan k’anchayninmanta karunchakusqa",
+                  bf_storage_text2: "Amachaq wayra pachapi paquetechasqa.",
+                  bf_net_weight_label: "Llasaq llasaynin:",
+               },
+               ht: {
+                  head2_title: "Manje terapetik ki pare pou itilize (RUTF)",
+                  head2_sachet: "1 SACHET = 500 kcal",
+                  head2_dose: "Rekòmandasyon dòz: 150-185 kcal / kg / jou",
+                  head2_perchild: "pou chak timoun pou 4 a 8 semèn.",
+                  head2_mgmt:
+                     "Pou jesyon dyetetik timoun ki gen plis pase 6 mwa ki gen malnitrisyon egi grav san konplikasyon medikal.",
+                  usage_heading: "Enstriksyon Itilizasyon:",
+                  usage_no_water: "Pa ajoute dlo",
+                  usage_no_heat: "Pa Chofe",
+                  usage_wash: "Lave men yo ak mase",
+                  usage_squeeze: "Peze & Manje",
+                  usage_feed: "Manje Timoun",
+                  usage_supplement: "Sipleman ak bay tete",
+                  ingredients_heading: "Engredyan:",
+                  ingredients_text:
+                     "Melanj lwil legim ki pa idwojèn (gen youn oswa plis nan sa ki annapre yo: palmis, plant soya, kanola), sik, poud laktoserom, poud lèt san grès, pistach, farin soya, lwil legim konplètman idwojèn (palm), vitamin ak mineral premiz.",
+                  allergens_text:
+                     "ALÈJÈN: pistach, lèt, soya. Ka genyen tras de gluten.",
+                  bf_excl_title: "Bay tete eksklizif",
+                  bf_excl_text:
+                     "Rekòmande pou premye 6 mwa lavi yo, epi kontinye bay tete rekòmande pou jiska dezan oswa pi lwen.",
+                  bf_med_title: "Sèvi ak anba sipèvizyon medikal",
+                  bf_med_text1:
+                     "Gen entansyon kòm sèl sous nitrisyon an konjonksyon avèk bay tete.",
+                  bf_med_text2:
+                     "Pa dwe itilize pou administrasyon Tib Nasogastric (tib NG).",
+                  bf_discard_title: "Yon fwa ouvri, jete apre 24 èdtan.",
+                  bf_storage_text1:
+                     "Pi bon estoke anba a 30 ° C, nan yon kote ki sèk, lwen limyè solèy la dirèk",
+                  bf_storage_text2: "Pake nan yon atmosfè pwoteksyon.",
+                  bf_net_weight_label: "Pwa nèt:",
+               },
+            };
+
+            function translatePage(language) {
+               const languageCode = languageCodes[language] || "en";
+               currentLanguageCode = languageCode;
+
+               const languageTranslations = localTranslations[languageCode];
+
+               i18nElements.forEach((el) => {
+                  const key = el.getAttribute("data-i18n");
+                  el.textContent =
+                     (languageTranslations && languageTranslations[key]) ||
+                     originalI18nText.get(el);
+               });
+            }
+
+            languageBtn.addEventListener("click", function (e) {
+               e.stopPropagation();
+               languageDropdown.toggleAttribute("data-open");
+            });
+
+            languageOptions.forEach((option) => {
+               option.addEventListener("click", () => {
+                  const value = option.dataset.value;
+                  const flag = option.dataset.flag;
+
+                  languageText.textContent = value;
+                  languageLogo.src = flag;
+                  languageLogo.alt = value;
+
+                  languageOptions.forEach((item) => {
+                     item.removeAttribute("data-selected");
+                  });
+
+                  option.setAttribute("data-selected", "");
+                  languageDropdown.removeAttribute("data-open");
+
+                  // Stop any in-progress read-aloud; the next play will use
+                  // the newly selected language's voice.
+                  stopSpeech();
+
+                  translatePage(value);
+               });
+            });
+
+            document.addEventListener("click", function (event) {
+               if (!languageDropdown.contains(event.target)) {
+                  languageDropdown.removeAttribute("data-open");
+               }
+            });
+
+            /* =========================================================
+       TEXT-TO-SPEECH READ-ALOUD
+       Reads head-2-box, head-3-box and head-5-box in sequence
+       using the browser's speechSynthesis voice for the
+       selected language, preferring a female voice when one
+       is available.
+       ========================================================= */
+
+            const speechLangMap = {
+               en: "en-US",
+               ar: "ar-SA",
+               es: "es-ES",
+               pt: "pt-PT",
+               sw: "sw-KE",
+               ha: "ha-NG",
+               yo: "yo-NG",
+               ig: "ig-NG",
+               am: "am-ET",
+               om: "om-ET",
+               so: "so-SO",
+               ti: "ti-ET",
+               lg: "lg-UG",
+               ln: "ln-CD",
+               kg: "kg-CD",
+               rw: "rw-RW",
+               mg: "mg-MG",
+               ny: "ny-MW",
+               nus: "nus-SS",
+               din: "din-SS",
+               ur: "ur-PK",
+               pa: "pa-IN",
+               sd: "sd-PK",
+               tl: "fil-PH",
+               qu: "qu-PE",
+               quc: "quc-GT",
+               ht: "ht-HT",
+               tw: "tw-GH",
+            };
+
+            const synth = window.speechSynthesis;
+            let voices = [];
+
+            function loadVoices() {
+               voices = synth ? synth.getVoices() : [];
+            }
+            if (synth) {
+               loadVoices();
+               synth.onvoiceschanged = loadVoices;
+            }
+
+            // Web Speech API voices have no standard "gender" field, so we infer
+            // it from voice names using known name patterns from the major
+            // engines (Microsoft, Google, Apple).
+            const femaleNamePattern =
+               /female|zira|hazel|susan|linda|karen|moira|tessa|fiona|serena|allison|ava|samantha|victoria|salli|joanna|kendra|kimberly|ivy|aditi|raveena|nicole|emma|olivia|zhiyu|xiaoxiao|yaoyao|huihui|eva|helena|sabina|maria|luciana|paulina|monica|laura|elena|catalina|conchita|lucia|marisol|penelope|camila|valentina|carla|amelia|veena|shreya|heera|sonia|chantal|celine|julie|audrey|amelie|marie|charlotte|léa|virginie|naja|freja|ingrid|astrid|liv|lotte|noor|yelda|filiz|dalia|zuri|amara|thandiwe|fatima|layla|amina/i;
+            const maleNamePattern =
+               /\bmale\b|david|mark|daniel|fred|alex|george|james|guy|ryan|christopher|paul|tom|thomas|matthew|justin|russell|arthur|oliver|rishi|ravi|prabhat|hemant|will|eric|brian|diego|jorge|carlos|pedro|miguel|henri|klaus|stefan|felix|magnus|erik|lars|björn/i;
+
+            function scoreVoice(v) {
+               const name = v.name || "";
+               if (femaleNamePattern.test(name)) return 2;
+               if (maleNamePattern.test(name)) return 0;
+               return 1; // unknown gender - treat as neutral/possible
+            }
+
+            function pickVoice(bcp47) {
+               if (!voices.length) return null;
+               const base = bcp47.split("-")[0];
+               let candidates = voices.filter((v) => v.lang === bcp47);
+               if (!candidates.length) {
+                  candidates = voices.filter(
+                     (v) => v.lang.split("-")[0] === base,
+                  );
+               }
+
+               if (candidates.length) {
+                  candidates.sort((a, b) => scoreVoice(b) - scoreVoice(a));
+                  // Female or unrecognized-gender match for this language -
+                  // good enough, keep the correct pronunciation.
+                  if (scoreVoice(candidates[0]) !== 0) return candidates[0];
+               }
+
+               // Either this language has no installed voice at all, or the
+               // only ones it has are confidently male - fall back to any
+               // female voice on the system so every language stays in
+               // female mode instead of dropping to a male or default voice.
+               const femaleVoices = voices.filter((v) =>
+                  femaleNamePattern.test(v.name || ""),
+               );
+               if (femaleVoices.length) return femaleVoices[0];
+
+               return candidates[0] || null;
+            }
+
+            function getBoxText(selector) {
+               const el = document.querySelector(selector);
+               if (!el) return "";
+               return el.textContent
+                  .split("\n")
+                  .join("\n")
+                  .toLowerCase()
+                  .replaceAll("kg", " kilo gram")
+                  .replaceAll("kcal", " kilocalorie")
+                  .replaceAll("/", " per")
+                  .replaceAll(">", " greater than")
+                  .replaceAll(",", ",\n")
+                  .replaceAll("nasogastric tube (ng tube)", " Nasogastric Tube")
+                  .replaceAll("°c", " degree Celsius")
+                  .replaceAll("92g", " 92 gram")
+                  .trim();
+            }
+
+            function estimateSpeechDurationMs(text) {
+               const CHARS_PER_SECOND = 13; // ~150 words per minute
+               return Math.max(800, (text.length / CHARS_PER_SECOND) * 1000);
+            }
+
+            // Chrome has a long-standing bug where speech synthesis silently
+            // stops firing events (no onend/onerror) after ~15s on a single
+            // utterance, or if the utterance object is garbage collected
+            // mid-speech, or if speak() is called immediately after cancel().
+            // These three pieces of state work around that so an unsupported
+            // voice/language never leaves the player stuck in "playing".
+            let currentUtterance = null;
+            let watchdogTimeoutId = null;
+            let keepAliveIntervalId = null;
+
+            // Tracked explicitly rather than read from synth.speaking/paused -
+            // those flags are unreliable right after cancel() and would let a
+            // language change leave the button thinking it can "resume" a
+            // sequence that no longer exists.
+            let playerState = "idle"; // "idle" | "playing" | "paused"
+
+            // The watchdog's finish/duration for whichever utterance is
+            // currently active, so pause/resume can disarm and re-arm it -
+            // otherwise it keeps counting down in real time while genuinely
+            // paused and force-cancels speech out from under a user who just
+            // paused for longer than the estimated speaking time.
+            let currentFinish = null;
+            let currentTimeoutMs = 0;
+
+            // Bumped every time a sequence starts or is stopped. cancel()
+            // fires the canceled utterance's onerror asynchronously, so a
+            // callback from an old (canceled) utterance can still land after
+            // a new sequence has already started - tagging each sequence
+            // with a generation lets stale callbacks recognize themselves and
+            // no-op instead of driving playback forward with the wrong index.
+            let playbackGeneration = 0;
+
+            function clearWatchdog() {
+               if (watchdogTimeoutId) {
+                  clearTimeout(watchdogTimeoutId);
+                  watchdogTimeoutId = null;
+               }
+            }
+
+            function armWatchdog() {
+               clearWatchdog();
+               if (!currentFinish) return;
+               watchdogTimeoutId = setTimeout(() => {
+                  if (synth) synth.cancel();
+                  currentFinish();
+               }, currentTimeoutMs);
+            }
+
+            function stopKeepAlive() {
+               if (keepAliveIntervalId) {
+                  clearInterval(keepAliveIntervalId);
+                  keepAliveIntervalId = null;
+               }
+            }
+
+            function startKeepAlive() {
+               stopKeepAlive();
+               keepAliveIntervalId = setInterval(() => {
+                  if (synth && synth.speaking && !synth.paused) {
+                     // Nudging pause/resume resets Chrome's internal watchdog
+                     // that otherwise kills long-running utterances.
+                     synth.pause();
+                     synth.resume();
+                  }
+               }, 12000);
+            }
+
+            function resetPlayerUI() {
+               stopKeepAlive();
+               clearWatchdog();
+               currentFinish = null;
+               currentTimeoutMs = 0;
+               currentUtterance = null;
+               playbackGeneration++;
+               playerState = "idle";
+               playBtn.removeAttribute("data-playing");
+               bars.forEach((bar) => bar.removeAttribute("data-played"));
+               updateTime(0);
+            }
+
+            function stopSpeech() {
+               if (synth) synth.cancel();
+               resetPlayerUI();
+            }
+
+            function speakOne(selector, onEnd, generation) {
+               const text = getBoxText(selector);
+               if (!text || !synth) {
+                  onEnd();
+                  return;
+               }
+
+               const bcp47 = speechLangMap[currentLanguageCode] || "en-US";
+               const utterance = new SpeechSynthesisUtterance(text);
+               utterance.lang = bcp47;
+               const voice = pickVoice(bcp47);
+               if (voice) utterance.voice = voice;
+
+               // Keep a strong reference - some browsers drop pending
+               // utterances (and never fire onend) if nothing else references
+               // the object once this function returns.
+               currentUtterance = utterance;
+
+               let finished = false;
+               function finish() {
+                  if (finished) return;
+                  finished = true;
+
+                  // A newer sequence (language change, stop, or a fresh play)
+                  // has since taken over - don't touch its state and don't
+                  // call onEnd, which would otherwise keep this canceled
+                  // sequence going with a stale index.
+                  if (generation !== playbackGeneration) return;
+
+                  clearWatchdog();
+                  if (currentFinish === finish) currentFinish = null;
+                  if (currentUtterance === utterance) currentUtterance = null;
+                  onEnd();
+               }
+
+               utterance.onend = finish;
+               utterance.onerror = finish;
+
+               // Voices that don't actually exist for the requested language,
+               // or a browser that never fires onend/onerror, would otherwise
+               // hang the player forever. Force-advance if nothing happens
+               // within a generous multiple of the estimated speaking time.
+               // Disarmed while genuinely paused (see the play/pause handler)
+               // so a long pause doesn't get treated as a hang.
+               currentFinish = finish;
+               currentTimeoutMs = estimateSpeechDurationMs(text) * 3 + 5000;
+               armWatchdog();
+
+               synth.speak(utterance);
+            }
+
+            function speakSequence(selectors) {
+               if (!synth) {
+                  alert(
+                     "Sorry, your browser does not support speech synthesis.",
+                  );
+                  return;
+               }
+               stopSpeech();
+
+               const texts = selectors.map(getBoxText).filter(Boolean);
+               if (!texts.length) return;
+
+               const generation = ++playbackGeneration;
+
+               playerState = "playing";
+               playBtn.setAttribute("data-playing", "");
+               // startKeepAlive();
+
+               let i = 0;
+               function next() {
+                  if (generation !== playbackGeneration) return; // superseded
+                  if (i >= selectors.length) {
+                     resetPlayerUI();
+                     return;
+                  }
+                  const selector = selectors[i];
+                  i++;
+                  speakOne(selector, next, generation);
+               }
+
+               // speak() called immediately after cancel() is unreliable in
+               // some browsers (the new utterance can be silently dropped);
+               // give cancel() a beat to finish first.
+               setTimeout(next, 50);
+            }
+
+            /* =========================================================
+       CUSTOM AUDIO PLAYER
+       ========================================================= */
+
+            const playBtn = document.getElementById("audioPlayBtn");
+            const waveform = document.getElementById("waveform");
+            const audioTime = document.getElementById("audioTime");
+
+            const BAR_COUNT = 62;
+
+            const heights = [
+               20, 28, 36, 30, 40, 25, 34, 42, 30, 38, 25, 35, 42, 28, 36, 22,
+               40, 32, 45, 30, 38, 25, 34, 42, 28, 36, 22, 40, 30, 44, 26, 38,
+               30, 42, 24, 35, 40, 28, 36, 22, 42, 30, 38, 25, 34, 42, 28, 36,
+               24, 40, 30, 38, 26, 35, 42, 28, 36, 24, 40, 30, 38, 26, 35,
+            ];
+
+            for (let i = 0; i < BAR_COUNT; i++) {
+               const bar = document.createElement("span");
+               bar.style.height = `${heights[i % heights.length]}%`;
+               waveform.appendChild(bar);
+            }
+
+            const bars = document.querySelectorAll("#waveform > span");
+
+            playBtn.addEventListener("click", () => {
+               if (!synth) {
+                  alert(
+                     "Sorry, your browser does not support speech synthesis.",
+                  );
+                  return;
+               }
+
+               if (playerState === "playing") {
+                  synth.pause();
+                  clearWatchdog();
+                  playerState = "paused";
+                  playBtn.removeAttribute("data-playing");
+                  return;
+               }
+
+               if (playerState === "paused") {
+                  synth.resume();
+                  armWatchdog();
+                  playerState = "playing";
+                  playBtn.setAttribute("data-playing", "");
+                  return;
+               }
+
+               speakSequence([
+                  "#rutfHead2Box",
+                  "#rutfHead3Box",
+                  "#rutfHead5Box",
+               ]);
+            });
+
+            function updateTime(seconds) {
+               const minutes = Math.floor(seconds / 60);
+               const secs = Math.floor(seconds % 60);
+
+               audioTime.textContent = `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+            }
+         })();
+      </script>
+   </body>
+</html>
